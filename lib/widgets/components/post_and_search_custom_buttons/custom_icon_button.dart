@@ -19,24 +19,25 @@ class CustomIconButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Padding(
-            padding: EdgeInsets.only(left: 8.0),
-            child: Text(title,
-                style: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                    fontSize: Dimensions.paragraphBodyAndNormalText_TextSize)),
-          ),
-          SizedBox(height: 4.0),
-          Card(
-              elevation: Dimensions.Elevation_CardUnselected,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8.0)),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Padding(
+          padding: EdgeInsets.only(left: 8.0),
+          child: Text(title,
+              style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                  fontSize: Dimensions.paragraphBodyAndNormalText_TextSize)),
+        ),
+        SizedBox(height: 4.0),
+        Card(
+            elevation: Dimensions.Elevation_CardUnselected,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8.0)),
+            child: InkWell(
+              borderRadius: BorderRadius.circular(8.0),
+              onTap: onTap,
               child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Container(
@@ -67,9 +68,9 @@ class CustomIconButton extends StatelessWidget {
                         )
                       ],
                     ),
-                  )))
-        ],
-      ),
+                  )),
+            ))
+      ],
     );
   }
 }

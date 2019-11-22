@@ -113,7 +113,7 @@ class _Preferences extends StatelessWidget{
             Expanded(
                 flex: 1,
                 child: CustomIconButton(
-                  title: "Número de asientos",
+                  title: "Asientos disponibles",
                   label: "3",
                   iconColor: CompanyColors.customBlack,
                   iconData: Icons.event_seat,
