@@ -17,10 +17,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           primaryColor: CompanyColors.customBlack,
           // This is the theme of your application.
-          // TODO primarySwatch: Colors.blue Modify Swatch
           primaryTextTheme: Typography().white,
-          textTheme: Typography().white,
-          iconTheme: IconThemeData(color: CompanyColors.green)),
+          textTheme: Typography().black,
+          iconTheme: IconThemeData(color: Colors.blue)),
       home: MyHomePage(title: 'Aventones'),
       localizationsDelegates: [
         // ... app-specific localization delegate[s] here
@@ -98,6 +97,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                           child: Text(
                             "Viajes compartidos y seguros",
                             style: TextStyle(
+                                color: Colors.white,
                                 fontFamily: 'Casual',
                                 fontStyle: FontStyle.italic,
                                 fontSize: 16.0),

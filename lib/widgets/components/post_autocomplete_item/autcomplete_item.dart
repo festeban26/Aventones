@@ -16,60 +16,65 @@ class PostAutocompleteItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
-      child: Container(
-        width: MediaQuery.of(context).size.width * 0.4,
-        padding: EdgeInsets.all(8.0),
-        decoration: BoxDecoration(
-            color: color, borderRadius: BorderRadius.all(Radius.circular(16))),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Row(
+      child: Card(
+        color: color,
+        elevation: Dimensions.Elevation_CardUnselected,
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
+        child: Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Container(
+            width: MediaQuery.of(context).size.width * 0.35,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Icon(Icons.trip_origin,
-                    color: CompanyColors.customWhite, size: 24),
-                SizedBox(width: 8),
-                _address(trip.origin)
+                Row(
+                  children: <Widget>[
+                    Icon(Icons.trip_origin,
+                        color: CompanyColors.customWhite, size: 24),
+                    SizedBox(width: 8),
+                    _address(trip.origin)
+                  ],
+                ),
+                SizedBox(height: 8),
+                Row(
+                  children: <Widget>[
+                    Icon(Icons.location_on,
+                        color: CompanyColors.customWhite, size: 24),
+                    SizedBox(width: 8),
+                    _address(trip.destination)
+                  ],
+                ),
+                SizedBox(height: 12),
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      Row(children: <Widget>[
+                        Icon(Icons.event_seat,
+                            color: CompanyColors.customWhite, size: 24),
+                        SizedBox(width: 4),
+                        Text(
+                          trip.numberOfAvailableSeats.toString(),
+                          style: TextStyle(
+                              color: CompanyColors.customWhite,
+                              fontSize: Dimensions.modalText_TextSize),
+                        )
+                      ]),
+                      Divider(),
+                      Row(children: <Widget>[
+                        Icon(Icons.attach_money,
+                            color: CompanyColors.customWhite, size: 24),
+                        Text(
+                          trip.pricePerSeat.toString(),
+                          style: TextStyle(
+                              color: CompanyColors.customWhite,
+                              fontSize: Dimensions.modalText_TextSize),
+                        )
+                      ])
+                    ])
               ],
             ),
-            SizedBox(height: 8),
-            Row(
-              children: <Widget>[
-                Icon(Icons.location_on,
-                    color: CompanyColors.customWhite, size: 24),
-                SizedBox(width: 8),
-                _address(trip.destination)
-              ],
-            ),
-            SizedBox(height: 12),
-            Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  Row(children: <Widget>[
-                    Icon(Icons.event_seat,
-                        color: CompanyColors.customWhite, size: 24),
-                    SizedBox(width: 4),
-                    Text(
-                      trip.numberOfAvailableSeats.toString(),
-                      style: TextStyle(
-                          color: CompanyColors.customWhite,
-                          fontSize: Dimensions.modalText_TextSize),
-                    )
-                  ]),
-                  Divider(),
-
-                  Row(children: <Widget>[
-                    Icon(Icons.attach_money,
-                        color: CompanyColors.customWhite, size: 24),
-                    Text(
-                      trip.pricePerSeat.toString(),
-                      style: TextStyle(
-                          color: CompanyColors.customWhite,
-                          fontSize: Dimensions.modalText_TextSize),
-                    )
-                  ])
-                ])
-          ],
+          ),
         ),
       ),
     );
@@ -79,7 +84,7 @@ class PostAutocompleteItem extends StatelessWidget {
 Widget _address(Address address) {
   return Flexible(
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+    crossAxisAlignment: CrossAxisAlignment.start,
     children: <Widget>[
       Text(address.city,
           style: TextStyle(

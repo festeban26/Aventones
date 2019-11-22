@@ -1,11 +1,10 @@
 import 'package:aventones/widgets/drawer/circular_image.dart';
 import 'package:aventones/widgets/drawer/zoom_scaffold.dart';
 import 'package:aventones/res/company_colors.dart';
-import 'package:aventones/tmp/google_maps_test.dart';
+import 'package:aventones/tmp/test.dart';
 import 'package:aventones/routes/post.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:aventones/tmp/test.dart';
 import 'package:aventones/routes/facebook_login.dart';
 
 class MenuScreen extends StatelessWidget {
@@ -13,10 +12,11 @@ class MenuScreen extends StatelessWidget {
       "https://graph.facebook.com/1244336338/picture?type=normal";
 
   final List<MenuItem> options = [
-    MenuItem(Icons.search, 'Buscar un viaje (Map Sample)', MapSample()),
+    MenuItem(Icons.search, 'Buscar un viaje', SecondRoute()),
     MenuItem(Icons.add, 'Publicar un viaje', PostScreen()),
     MenuItem(Icons.directions_car, 'Mis viajes', SecondRoute()),
     MenuItem(Icons.mail, 'Mensajes', SecondRoute()),
+    MenuItem(Icons.android, 'Test Route', TestRoute()),
   ];
 
   @override
@@ -49,26 +49,25 @@ class MenuScreen extends StatelessWidget {
                 ),
                 SizedBox(height: 16),
                 Padding(
-                  padding: const EdgeInsets.only(left: 16),
-                  child:  Text(
-                    'Esteban Flores',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                    ),
-                  )
-                ),
+                    padding: const EdgeInsets.only(left: 16),
+                    child: Text(
+                      'Esteban Flores',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
+                    )),
                 SizedBox(height: 8),
                 Padding(
                     padding: const EdgeInsets.only(left: 16),
-                    child:  Text(
+                    child: Text(
                       'Bienvenido a aventones!',
                       style: TextStyle(
                         color: Colors.grey,
                         fontSize: 13,
                       ),
-                    )
-                ),
+                    )),
               ],
             ),
             SizedBox(height: 32),
@@ -82,9 +81,11 @@ class MenuScreen extends StatelessWidget {
                     size: 20,
                   ),
                   title: Text(
-                    "Inicio",style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold),
+                    "Inicio",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold),
                   ),
                   onTap: () {
                     Provider.of<MenuController>(context, listen: true).toggle();
@@ -105,7 +106,8 @@ class MenuScreen extends StatelessWidget {
                     item.title,
                     style: TextStyle(
                         fontSize: 14,
-                        fontWeight: FontWeight.bold),
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white),
                   ),
                   onTap: () {
                     Navigator.push(
@@ -131,24 +133,25 @@ class MenuScreen extends StatelessWidget {
                 color: CompanyColors.customWhite,
                 size: 20,
               ),
-              title: Text('Configuración'),
+              title:
+                  Text('Configuración', style: TextStyle(color: Colors.white)),
               dense: true,
             ),
             ListTile(
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => FacebookLoginScreen()),
+                  MaterialPageRoute(
+                      builder: (context) => FacebookLoginScreen()),
                 );
               },
               leading: Icon(
                 Icons.exit_to_app,
                 color: CompanyColors.customWhite,
                 size: 20,
-
               ),
               title: Text('Cerrar sesión',
-                  style: TextStyle(fontSize: 14)),
+                  style: TextStyle(color: Colors.white, fontSize: 14)),
               dense: true,
             ),
           ],

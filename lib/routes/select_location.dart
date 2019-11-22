@@ -1,7 +1,7 @@
 import 'package:aventones/res/company_colors.dart';
 import 'package:aventones/res/dimensions.dart';
 import 'package:aventones/routes/location_history.dart';
-import 'package:aventones/routes/location_selection_on_map.dart';
+import 'package:aventones/routes/select_location_on_map.dart';
 import 'package:flutter/material.dart';
 import 'package:aventones/widgets/origin_and_destination_container.dart';
 
@@ -72,7 +72,7 @@ class SelectLocationRoute extends StatelessWidget {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  LocationSelectionOnMapRoute()),
+                                                  SelectLocationOnMapRoute()),
                                         );
                                       },
                                       child: Row(

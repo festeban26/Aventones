@@ -8,10 +8,6 @@ class OriginAndDestinationContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         alignment: Alignment.center,
-        padding: EdgeInsets.all(16),
-        decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.all(Radius.circular(16))),
         child: Row(
           children: <Widget>[
             Expanded(

@@ -2,8 +2,22 @@ import 'package:aventones/res/company_colors.dart';
 import 'package:aventones/res/dimensions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-class LocationSelectionOnMapRoute extends StatelessWidget {
+class SelectLocationOnMapRoute extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() => SelectLocationOnMapRouteState();
+}
+
+class SelectLocationOnMapRouteState extends State<SelectLocationOnMapRoute> {
+  GoogleMapController mapController;
+
+  final LatLng _center = const LatLng(45.521563, -122.677433);
+
+  void _onMapCreated(GoogleMapController controller) {
+    mapController = controller;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -13,31 +27,34 @@ class LocationSelectionOnMapRoute extends StatelessWidget {
         title: const Text("Selecciona la ubicación"),
         elevation: 0.0,
       ),
-      body: Container(
-        child: SafeArea(
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: <Widget>[
-              Expanded(
-                child: Container(
-                    width: MediaQuery.of(context).size.width,
-                    decoration: BoxDecoration(
-                      color: CompanyColors.customLightGray,
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(32.0),
-                          topRight: Radius.circular(32.0)),
-                    ),
-                    child: SingleChildScrollView(
-                        child: Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: <Widget>[])))),
-              ),
-            ],
+      body: Stack(
+        children: <Widget>[
+          GoogleMap(
+            onMapCreated: _onMapCreated,
+            initialCameraPosition: CameraPosition(
+              target: _center,
+              zoom: 11.0,
+            ),
           ),
-        ),
+          Positioned(
+            child: ShaderMask(
+              blendMode: BlendMode.srcOut,
+              shaderCallback: (bounds) => LinearGradient(
+                  colors: [CompanyColors.customBlack],
+                  stops: [0.0]).createShader(bounds),
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                height: 32,
+                decoration: BoxDecoration(
+                  color: Colors.green,
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(32.0),
+                      topRight: Radius.circular(32.0)),
+                ),
+              ),
+            ),
+          )
+        ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
       floatingActionButton: FloatingActionButton(

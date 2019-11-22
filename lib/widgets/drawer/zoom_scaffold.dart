@@ -59,11 +59,13 @@ class _ZoomScaffoldState extends State<ZoomScaffold>
             type: BottomNavigationBarType.fixed,
             items: const <BottomNavigationBarItem>[
               BottomNavigationBarItem(
-                  icon: Icon(Icons.inbox), title: Text("Mensajes")),
+                  icon: Icon(Icons.inbox),
+                  title:
+                      Text("Mensajes", style: TextStyle(color: Colors.white))),
               BottomNavigationBarItem(
-                  icon: Icon(Icons.directions_car), title: Text("Mis Viajes")),
+                  icon: Icon(Icons.directions_car), title: Text("Mis Viajes", style: TextStyle(color: Colors.white))),
               BottomNavigationBarItem(
-                  icon: Icon(Icons.feedback), title: Text("Feedback"))
+                  icon: Icon(Icons.feedback), title: Text("Feedback", style: TextStyle(color: Colors.white)))
             ]),
       ),
     ));
