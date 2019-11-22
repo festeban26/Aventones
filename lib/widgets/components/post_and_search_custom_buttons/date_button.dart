@@ -24,7 +24,8 @@ class _DateButtonState extends State<DateButton> {
           firstDate: DateTime.now().add(Duration(days: -1)),
           // Up to 30 days in the future
           lastDate: DateTime.now().add(Duration(days: 30)),
-          locale: Locale('es'));
+          locale: Locale('es'),
+      );
       if (_pickedDate != null && _pickedDate != _selectedDate)
         setState(() {
           _selectedDate = _pickedDate;

@@ -3,6 +3,7 @@ import 'package:aventones/models/trip.dart';
 import 'package:aventones/res/company_colors.dart';
 import 'package:aventones/widgets/components/post_and_search_custom_buttons/custom_icon_button.dart';
 import 'package:aventones/widgets/components/post_and_search_custom_buttons/date_button.dart';
+import 'package:aventones/widgets/components/post_and_search_custom_buttons/number_of_seats_button.dart';
 import 'package:aventones/widgets/components/post_and_search_custom_buttons/time_button.dart';
 import 'package:aventones/widgets/components/post_autocomplete_item/autcomplete_item.dart';
 import 'package:flutter/cupertino.dart';
@@ -111,13 +112,11 @@ class _Preferences extends StatelessWidget{
         Row(
           children: <Widget>[
             Expanded(
-                flex: 1,
-                child: CustomIconButton(
-                  title: "Asientos disponibles",
-                  label: "3",
-                  iconColor: CompanyColors.customBlack,
-                  iconData: Icons.event_seat,
-                )),
+              flex: 1,
+              child: NumberOfSeatsButton(
+                iconColor: CompanyColors.customBlack,
+              ),
+            ),
             SizedBox(width: 8.0),
             Expanded(
               flex: 1,
