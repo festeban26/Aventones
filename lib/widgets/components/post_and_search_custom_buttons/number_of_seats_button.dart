@@ -49,15 +49,12 @@ class FunkyOverlayState extends State<FunkyOverlay>
     super.initState();
 
     controller =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 400));
+        AnimationController(vsync: this, duration: Duration(milliseconds: 300));
     scaleAnimation =
         CurvedAnimation(parent: controller, curve: Curves.ease);
 
-    controller.addListener(() {
-      setState(() {});
-    });
-
     controller.forward();
+    controller.addListener(() => setState(() {}));
   }
 
   @override
