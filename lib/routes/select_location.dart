@@ -3,7 +3,7 @@ import 'package:aventones/res/dimensions.dart';
 import 'package:aventones/routes/location_history.dart';
 import 'package:aventones/routes/select_location_on_map.dart';
 import 'package:flutter/material.dart';
-import 'package:aventones/widgets/origin_and_destination_container.dart';
+import 'package:aventones/widgets/origin_and_destination_preview_container.dart';
 
 class SelectLocationRoute extends StatelessWidget {
   @override
@@ -22,7 +22,7 @@ class SelectLocationRoute extends StatelessWidget {
               Padding(
                   padding: const EdgeInsets.only(
                       left: 16.0, right: 16.0, bottom: 16.0),
-                  child: OriginAndDestinationContainer()),
+                  child: OriginAndDestinationPreviewContainer()),
               Expanded(
                 child: Container(
                     width: MediaQuery.of(context).size.width,

@@ -8,7 +8,7 @@ import 'package:aventones/widgets/components/post_and_search_custom_buttons/time
 import 'package:aventones/widgets/components/post_autocomplete_item/autcomplete_item.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:aventones/widgets/origin_and_destination_container.dart';
+import 'package:aventones/widgets/origin_and_destination_preview_container.dart';
 import 'package:aventones/res/dimensions.dart';
 
 class PostScreen extends StatefulWidget {
@@ -81,7 +81,7 @@ class _OriginAndDestinationContainer extends StatelessWidget {
         RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
         child: Padding(
             padding: const EdgeInsets.all(16.0),
-            child: OriginAndDestinationContainer()));
+            child: OriginAndDestinationPreviewContainer()));
   }
 }
 
