@@ -40,6 +40,9 @@ dependencies:
     sdk: flutter
   flutter_cupertino_localizations: ^1.0.1
 
+  # Geolocator for uses on map
+  geolocator: ^5.1.5
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

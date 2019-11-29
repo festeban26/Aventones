@@ -2,6 +2,7 @@ import 'package:aventones/res/company_colors.dart';
 import 'package:aventones/res/dimensions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class SelectLocationOnMapRoute extends StatefulWidget {
@@ -10,12 +11,46 @@ class SelectLocationOnMapRoute extends StatefulWidget {
 }
 
 class SelectLocationOnMapRouteState extends State<SelectLocationOnMapRoute> {
-  GoogleMapController mapController;
+  GoogleMapController _mapController;
+  Position _currentUserPosition;
+  LatLng _mapCenter;
+  final double _mapZoom = 7.0;
 
-  final LatLng _center = const LatLng(45.521563, -122.677433);
+  @override
+  void initState() {
+    // Initialize map center on Ecuador
+    _mapCenter = const LatLng(-0.179471, -78.467756);
+
+    super.initState();
+  }
 
   void _onMapCreated(GoogleMapController controller) {
-    mapController = controller;
+    _mapController = controller;
+    _getCurrentLocation();
+  }
+
+  _updateMapCameraToCurrentLocation() {
+    if (_currentUserPosition != null) {
+      _mapController.animateCamera(CameraUpdate.newCameraPosition(
+        CameraPosition(
+            target: LatLng(
+                _currentUserPosition.latitude, _currentUserPosition.longitude),
+            zoom: 15.0),
+      ));
+    }
+  }
+
+  _getCurrentLocation() {
+    Geolocator()
+        .getCurrentPosition(desiredAccuracy: LocationAccuracy.medium)
+        .then(
+      ((Position position) {
+        setState(() {
+          _currentUserPosition = position;
+          _updateMapCameraToCurrentLocation();
+        });
+      }),
+    );
   }
 
   @override
@@ -32,8 +67,8 @@ class SelectLocationOnMapRouteState extends State<SelectLocationOnMapRoute> {
           GoogleMap(
             onMapCreated: _onMapCreated,
             initialCameraPosition: CameraPosition(
-              target: _center,
-              zoom: 11.0,
+              target: _mapCenter,
+              zoom: _mapZoom,
             ),
           ),
           Positioned(
