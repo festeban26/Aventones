@@ -47,7 +47,7 @@ class SelectLocationOnMapRouteState extends State<SelectLocationOnMapRoute> {
       ((Position position) {
         setState(() {
           _currentUserPosition = position;
-          _updateMapCameraToCurrentLocation();
+          //_updateMapCameraToCurrentLocation();
         });
       }),
     );
@@ -70,6 +70,12 @@ class SelectLocationOnMapRouteState extends State<SelectLocationOnMapRoute> {
               target: _mapCenter,
               zoom: _mapZoom,
             ),
+            mapType: MapType.normal,
+            // No tilt or rotation gestures enabled
+            rotateGesturesEnabled: false,
+            tiltGesturesEnabled: false,
+            myLocationButtonEnabled: true,
+            myLocationEnabled: true,
           ),
           Positioned(
             child: ShaderMask(
