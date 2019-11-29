@@ -8,7 +8,7 @@ import 'package:aventones/widgets/components/post_and_search_custom_buttons/time
 import 'package:aventones/widgets/components/post_autocomplete_item/autcomplete_item.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:aventones/widgets/origin_and_destination_preview_container.dart';
+import 'package:aventones/widgets/origin_and_destination_container.dart';
 import 'package:aventones/res/dimensions.dart';
 
 class PostScreen extends StatefulWidget {
@@ -53,7 +53,7 @@ class _PostScreenState extends State<PostScreen> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
                           SizedBox(height: 8),
-                          _OriginAndDestinationContainer(),
+                          OriginAndDestinationContainer(isTheContainerAPreview: true),
                           SizedBox(height: 8),
                           _Preferences(),
                           SizedBox(height: 16),
@@ -69,19 +69,6 @@ class _PostScreenState extends State<PostScreen> {
             ],
           ),
         ));
-  }
-}
-
-class _OriginAndDestinationContainer extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-        elevation: Dimensions.Elevation_CardUnselected,
-        shape:
-        RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
-        child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: OriginAndDestinationPreviewContainer()));
   }
 }
 
