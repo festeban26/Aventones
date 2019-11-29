@@ -111,18 +111,24 @@ Widget _originOrDestinationTextWidget(
   // If there is no address
   if (address?.isEmpty ?? true) {
     child = TextFormField(
-      initialValue: ((){
-        if(isTheContainerAPreview)
+      initialValue: (() {
+        if (isTheContainerAPreview)
           return hintText;
         else
           return '';
       }()),
       // If the container is a preview, disable editing
-      enabled: ((){
-        if(isTheContainerAPreview)
+      enabled: (() {
+        if (isTheContainerAPreview)
           return false;
         else
           return true;
+      }()),
+      autofocus: (() {
+        if (!isTheContainerAPreview && isOrigin)
+          return true;
+        else
+          return false;
       }()),
       keyboardType: TextInputType.text,
       decoration: InputDecoration(
