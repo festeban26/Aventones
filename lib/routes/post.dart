@@ -1,9 +1,9 @@
 import 'package:aventones/models/address.dart';
 import 'package:aventones/models/trip.dart';
 import 'package:aventones/res/company_colors.dart';
-import 'package:aventones/widgets/components/post_and_search_custom_buttons/custom_icon_button.dart';
 import 'package:aventones/widgets/components/post_and_search_custom_buttons/date_button.dart';
 import 'package:aventones/widgets/components/post_and_search_custom_buttons/number_of_seats_button.dart';
+import 'package:aventones/widgets/components/post_and_search_custom_buttons/price_button.dart';
 import 'package:aventones/widgets/components/post_and_search_custom_buttons/time_button.dart';
 import 'package:aventones/widgets/components/post_autocomplete_item/autcomplete_item.dart';
 import 'package:flutter/cupertino.dart';
@@ -120,12 +120,9 @@ class _Preferences extends StatelessWidget{
             SizedBox(width: 8.0),
             Expanded(
               flex: 1,
-              child: CustomIconButton(
-                title: "Precio por asiento",
-                label: "5.00",
+              child: PriceButton(
                 iconColor: CompanyColors.customBlack,
-                iconData: Icons.attach_money,
-              ),
+              )
             )
           ],
         )
