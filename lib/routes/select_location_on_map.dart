@@ -13,7 +13,7 @@ class SelectLocationOnMapRoute extends StatefulWidget {
 class SelectLocationOnMapRouteState extends State<SelectLocationOnMapRoute> {
   GoogleMapController _mapController;
 
-  Position _selectedPosition;
+  LatLng _selectedLocation;
   bool _showPinOnMap;
 
   @override
@@ -31,15 +31,16 @@ class SelectLocationOnMapRouteState extends State<SelectLocationOnMapRoute> {
     // Update the map location tu user current location
     _updateLocation();
 
-
-    // Wait then ppdate the UI by showing the pin
+    // Wait then update the UI by showing the pin
     Future.delayed(const Duration(milliseconds: 3000), () {
       setState(() {
         _showPinOnMap = true;
       });
     });
+  }
 
-
+  void _onCameraMove(CameraPosition position) {
+    _selectedLocation = position.target;
   }
 
   void _updateLocation() async {
@@ -51,8 +52,7 @@ class SelectLocationOnMapRouteState extends State<SelectLocationOnMapRoute> {
           )
           .timeout(Duration(seconds: 15))
           .then((value) {
-        // Set the new map center, then move the camera to it
-        _selectedPosition = value;
+        // Move the camera to the user position
         _mapController.animateCamera(
           CameraUpdate.newCameraPosition(
             CameraPosition(
@@ -78,6 +78,7 @@ class SelectLocationOnMapRouteState extends State<SelectLocationOnMapRoute> {
         children: <Widget>[
           GoogleMap(
             onMapCreated: _onMapCreated,
+            onCameraMove: _onCameraMove,
             initialCameraPosition: CameraPosition(
               // Initialize camera on Ecuador
               target: const LatLng(-0.179471, -78.467756),
