@@ -12,45 +12,43 @@ class SelectLocationOnMapRoute extends StatefulWidget {
 
 class SelectLocationOnMapRouteState extends State<SelectLocationOnMapRoute> {
   GoogleMapController _mapController;
-  Position _currentUserPosition;
-  LatLng _mapCenter;
-  final double _mapZoom = 7.0;
+
+  Position _selectedPosition;
 
   @override
   void initState() {
-    // Initialize map center on Ecuador
-    _mapCenter = const LatLng(-0.179471, -78.467756);
-
     super.initState();
   }
 
   void _onMapCreated(GoogleMapController controller) {
+    // Sets the controller
     _mapController = controller;
-    _getCurrentLocation();
+
+    // Update the map location tu user current location
+    _updateLocation();
   }
 
-  _updateMapCameraToCurrentLocation() {
-    if (_currentUserPosition != null) {
-      _mapController.animateCamera(CameraUpdate.newCameraPosition(
-        CameraPosition(
-            target: LatLng(
-                _currentUserPosition.latitude, _currentUserPosition.longitude),
-            zoom: 15.0),
-      ));
+  void _updateLocation() async {
+    try {
+      Geolocator()
+          .getCurrentPosition(
+            desiredAccuracy: LocationAccuracy.medium,
+            locationPermissionLevel: GeolocationPermission.locationWhenInUse,
+          )
+          .timeout(Duration(seconds: 15))
+          .then((value) {
+        // Set the new map center, then move the camera to it
+        _selectedPosition = value;
+        _mapController.animateCamera(
+          CameraUpdate.newCameraPosition(
+            CameraPosition(
+                target: LatLng(value.latitude, value.longitude), zoom: 15.0),
+          ),
+        );
+      });
+    } catch (e) {
+      print('Error: ${e.toString()}');
     }
-  }
-
-  _getCurrentLocation() {
-    Geolocator()
-        .getCurrentPosition(desiredAccuracy: LocationAccuracy.medium)
-        .then(
-      ((Position position) {
-        setState(() {
-          _currentUserPosition = position;
-          //_updateMapCameraToCurrentLocation();
-        });
-      }),
-    );
   }
 
   @override
@@ -67,8 +65,10 @@ class SelectLocationOnMapRouteState extends State<SelectLocationOnMapRoute> {
           GoogleMap(
             onMapCreated: _onMapCreated,
             initialCameraPosition: CameraPosition(
-              target: _mapCenter,
-              zoom: _mapZoom,
+              // Initialize camera on Ecuador
+              target: const LatLng(-0.179471, -78.467756),
+              // initial map zoom
+              zoom: 7.0,
             ),
             mapType: MapType.normal,
             // No tilt or rotation gestures enabled
