@@ -14,10 +14,14 @@ class SelectLocationOnMapRouteState extends State<SelectLocationOnMapRoute> {
   GoogleMapController _mapController;
 
   Position _selectedPosition;
+  bool _showPinOnMap;
 
   @override
   void initState() {
     super.initState();
+
+    // Do not show pin on map on start up. Show it once the map is loaded
+    _showPinOnMap = false;
   }
 
   void _onMapCreated(GoogleMapController controller) {
@@ -26,6 +30,16 @@ class SelectLocationOnMapRouteState extends State<SelectLocationOnMapRoute> {
 
     // Update the map location tu user current location
     _updateLocation();
+
+
+    // Wait then ppdate the UI by showing the pin
+    Future.delayed(const Duration(milliseconds: 3000), () {
+      setState(() {
+        _showPinOnMap = true;
+      });
+    });
+
+
   }
 
   void _updateLocation() async {
@@ -94,7 +108,21 @@ class SelectLocationOnMapRouteState extends State<SelectLocationOnMapRoute> {
                 ),
               ),
             ),
-          )
+          ),
+          Align(
+            alignment: Alignment.center,
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 24.0),
+              child: Visibility(
+                visible: _showPinOnMap,
+                child: Icon(
+                  Icons.location_on,
+                  color: CompanyColors.customBlack,
+                  size: 48.0,
+                ),
+              ),
+            ),
+          ),
         ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
