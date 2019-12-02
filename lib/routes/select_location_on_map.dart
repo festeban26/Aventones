@@ -20,6 +20,9 @@ class SelectLocationOnMapRouteState extends State<SelectLocationOnMapRoute> {
   void initState() {
     super.initState();
 
+    // Default initial location is a a place on Quito, Ecuador
+    _selectedLocation = LatLng(-0.179471, -78.467756);
+
     // Do not show pin on map on start up. Show it once the map is loaded
     _showPinOnMap = false;
   }
@@ -40,7 +43,9 @@ class SelectLocationOnMapRouteState extends State<SelectLocationOnMapRoute> {
   }
 
   void _onCameraMove(CameraPosition position) {
-    _selectedLocation = position.target;
+    setState(() {
+      _selectedLocation = position.target;
+    });
   }
 
   void _updateLocation() async {
@@ -80,8 +85,7 @@ class SelectLocationOnMapRouteState extends State<SelectLocationOnMapRoute> {
             onMapCreated: _onMapCreated,
             onCameraMove: _onCameraMove,
             initialCameraPosition: CameraPosition(
-              // Initialize camera on Ecuador
-              target: const LatLng(-0.179471, -78.467756),
+              target: _selectedLocation,
               // initial map zoom
               zoom: 7.0,
             ),
@@ -113,7 +117,11 @@ class SelectLocationOnMapRouteState extends State<SelectLocationOnMapRoute> {
           Align(
             alignment: Alignment.center,
             child: Padding(
-              padding: const EdgeInsets.only(bottom: 24.0),
+              // So the pin bottom is shown at the center of the screen.
+              // Added 12 points  (24 = 48 / 2) + 2 due to white area around pin
+              // image asset. It is not clear but 36 offset sets the pin bottom
+              // at the center of the screen.
+              padding: const EdgeInsets.only(bottom: 36.0),
               child: Visibility(
                 visible: _showPinOnMap,
                 child: Icon(
@@ -137,30 +145,33 @@ class SelectLocationOnMapRouteState extends State<SelectLocationOnMapRoute> {
         shape: CircularNotchedRectangle(),
         notchMargin: 4.0,
         child: Padding(
-            padding: EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                Text("Ibarra, Ecuador",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: Dimensions.pageTitles_TextSize,
-                        fontWeight: FontWeight.bold)),
-                SizedBox(height: 8.0),
-                Text("José Larrea 2-40, Ibarra",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize:
-                            Dimensions.paragraphBodyAndNormalText_TextSize,
-                        fontWeight: FontWeight.bold)),
-                SizedBox(height: 4.0),
-                Text("0.342901, -78.110276",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: Dimensions.small_TextSize)),
-              ],
-            )),
+          padding: EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Text("Ibarra, Ecuador",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: Dimensions.pageTitles_TextSize,
+                      fontWeight: FontWeight.bold)),
+              SizedBox(height: 8.0),
+              Text("José Larrea 2-40, Ibarra",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: Dimensions.paragraphBodyAndNormalText_TextSize,
+                      fontWeight: FontWeight.bold)),
+              SizedBox(height: 4.0),
+              Text(
+                  _selectedLocation.latitude.toStringAsFixed(6) +
+                      ', ' +
+                      _selectedLocation.longitude.toStringAsFixed(6),
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: Dimensions.small_TextSize)),
+            ],
+          ),
+        ),
       ),
     );
   }
