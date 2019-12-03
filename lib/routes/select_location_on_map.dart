@@ -64,9 +64,9 @@ class SelectLocationOnMapRouteState extends State<SelectLocationOnMapRoute> {
 
     Future.delayed(
       const Duration(milliseconds: 2000),
-          () {
+      () {
         Duration difference =
-        DateTime.now().difference(_lastTimeOnMapCameraIdleWasCalled);
+            DateTime.now().difference(_lastTimeOnMapCameraIdleWasCalled);
         if (difference.inMilliseconds > 2000) {
           _updateAddressText();
         }
@@ -115,16 +115,24 @@ class SelectLocationOnMapRouteState extends State<SelectLocationOnMapRoute> {
           .timeout(Duration(seconds: 10))
           .then(
         (value) {
-
           String city = value.last.locality;
           String country = value.last.country;
-
+          String administrativeArea = value.last.administrativeArea;
           String streetName = value.last.thoroughfare;
 
           setState(() {
-            _selectedLocationGeneralAddressText = city + ', ' + country;
-            _selectedLocationSpecificAddressText = streetName;
 
+            // If city is null or empty
+            if(city?.isEmpty ?? true){
+              // Display province + country
+              _selectedLocationGeneralAddressText = administrativeArea + ', ' + country;
+            }
+            else
+              // Display city + country
+              _selectedLocationGeneralAddressText = city + ', ' + country;
+
+
+            _selectedLocationSpecificAddressText = streetName;
           });
 
           /* EXAMPLES
@@ -137,7 +145,6 @@ class SelectLocationOnMapRouteState extends State<SelectLocationOnMapRoute> {
           print('subLocality: ' + value.last.subLocality); // Parroquia el Sagrario
           print('thoroughfare: ' + value.last.thoroughfare); // José María Larrea y Jijón
           print('subThoroughfare: ' + value.last.subThoroughfare); // 3
-
            */
         },
       );
@@ -147,8 +154,6 @@ class SelectLocationOnMapRouteState extends State<SelectLocationOnMapRoute> {
       print('Error: ${e.toString()}');
     }
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -167,7 +172,7 @@ class SelectLocationOnMapRouteState extends State<SelectLocationOnMapRoute> {
             onCameraIdle: () {
               _onCameraIdle();
             },
-            onCameraMoveStarted: (){
+            onCameraMoveStarted: () {
               _onCameraMoveStarted();
             },
             initialCameraPosition: CameraPosition(
