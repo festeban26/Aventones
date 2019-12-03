@@ -13,8 +13,13 @@ class SelectLocationOnMapRoute extends StatefulWidget {
 class SelectLocationOnMapRouteState extends State<SelectLocationOnMapRoute> {
   GoogleMapController _mapController;
 
-  LatLng _selectedLocation;
   bool _showPinOnMap;
+
+  LatLng _selectedLocation;
+  String _selectedLocationGeneralAddressText;
+  String _selectedLocationSpecificAddressText;
+
+  DateTime _lastTimeOnMapCameraIdleWasCalled;
 
   @override
   void initState() {
@@ -22,6 +27,8 @@ class SelectLocationOnMapRouteState extends State<SelectLocationOnMapRoute> {
 
     // Default initial location is a a place on Quito, Ecuador
     _selectedLocation = LatLng(-0.179471, -78.467756);
+    _selectedLocationGeneralAddressText = 'Quito, Ecuador';
+    _selectedLocationSpecificAddressText = 'Parque Metropolitano de Quito';
 
     // Do not show pin on map on start up. Show it once the map is loaded
     _showPinOnMap = false;
@@ -42,9 +49,35 @@ class SelectLocationOnMapRouteState extends State<SelectLocationOnMapRoute> {
     });
   }
 
+  /// Update the LatLng text with every camera move.
+  /// This keeps the variable _selectedLocation synced with the Map
   void _onCameraMove(CameraPosition position) {
     setState(() {
       _selectedLocation = position.target;
+    });
+  }
+
+  /// If 2 seconds has passed since the last user interaction with the map,
+  /// call the geolocator to get an address
+  void _onCameraIdle() {
+    _lastTimeOnMapCameraIdleWasCalled = DateTime.now();
+
+    Future.delayed(
+      const Duration(milliseconds: 2000),
+          () {
+        Duration difference =
+        DateTime.now().difference(_lastTimeOnMapCameraIdleWasCalled);
+        if (difference.inMilliseconds > 2000) {
+          _updateAddressText();
+        }
+      },
+    );
+  }
+
+  void _onCameraMoveStarted() {
+    setState(() {
+      _selectedLocationGeneralAddressText = 'Cargando...';
+      _selectedLocationSpecificAddressText = '';
     });
   }
 
@@ -55,20 +88,67 @@ class SelectLocationOnMapRouteState extends State<SelectLocationOnMapRoute> {
             desiredAccuracy: LocationAccuracy.medium,
             locationPermissionLevel: GeolocationPermission.locationWhenInUse,
           )
-          .timeout(Duration(seconds: 15))
-          .then((value) {
-        // Move the camera to the user position
-        _mapController.animateCamera(
-          CameraUpdate.newCameraPosition(
-            CameraPosition(
-                target: LatLng(value.latitude, value.longitude), zoom: 15.0),
-          ),
-        );
-      });
-    } catch (e) {
+          .timeout(Duration(seconds: 10))
+          .then(
+        (value) {
+          // Move the camera to the user position
+          _mapController.animateCamera(
+            CameraUpdate.newCameraPosition(
+              CameraPosition(
+                  target: LatLng(value.latitude, value.longitude), zoom: 15.0),
+            ),
+          );
+        },
+      );
+    }
+    // TODO
+    catch (e) {
       print('Error: ${e.toString()}');
     }
   }
+
+  void _updateAddressText() async {
+    try {
+      Geolocator()
+          .placemarkFromCoordinates(
+              _selectedLocation.latitude, _selectedLocation.longitude)
+          .timeout(Duration(seconds: 10))
+          .then(
+        (value) {
+
+          String city = value.last.locality;
+          String country = value.last.country;
+
+          String streetName = value.last.thoroughfare;
+
+          setState(() {
+            _selectedLocationGeneralAddressText = city + ', ' + country;
+            _selectedLocationSpecificAddressText = streetName;
+
+          });
+
+          /* EXAMPLES
+          print('name: ' + value.last.name); // 3
+          print('country: ' + value.last.country); // Ecuador
+          print('postalCode: ' + value.last.postalCode); // 'Empty'
+          print('administrativeArea: ' + value.last.administrativeArea); // Provincia de Imbabura
+          print('subAdministrativeArea: ' + value.last.subAdministrativeArea); // Ibarra
+          print('locality: ' + value.last.locality); // Ibarra
+          print('subLocality: ' + value.last.subLocality); // Parroquia el Sagrario
+          print('thoroughfare: ' + value.last.thoroughfare); // José María Larrea y Jijón
+          print('subThoroughfare: ' + value.last.subThoroughfare); // 3
+
+           */
+        },
+      );
+    }
+    // TODO
+    catch (e) {
+      print('Error: ${e.toString()}');
+    }
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -84,6 +164,12 @@ class SelectLocationOnMapRouteState extends State<SelectLocationOnMapRoute> {
           GoogleMap(
             onMapCreated: _onMapCreated,
             onCameraMove: _onCameraMove,
+            onCameraIdle: () {
+              _onCameraIdle();
+            },
+            onCameraMoveStarted: (){
+              _onCameraMoveStarted();
+            },
             initialCameraPosition: CameraPosition(
               target: _selectedLocation,
               // initial map zoom
@@ -150,13 +236,13 @@ class SelectLocationOnMapRouteState extends State<SelectLocationOnMapRoute> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              Text("Ibarra, Ecuador",
+              Text(_selectedLocationGeneralAddressText,
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: Dimensions.pageTitles_TextSize,
                       fontWeight: FontWeight.bold)),
               SizedBox(height: 8.0),
-              Text("José Larrea 2-40, Ibarra",
+              Text(_selectedLocationSpecificAddressText,
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: Dimensions.paragraphBodyAndNormalText_TextSize,
