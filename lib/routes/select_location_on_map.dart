@@ -1,3 +1,4 @@
+import 'package:aventones/models/location.dart';
 import 'package:aventones/res/company_colors.dart';
 import 'package:aventones/res/dimensions.dart';
 import 'package:flutter/cupertino.dart';
@@ -11,14 +12,14 @@ class SelectLocationOnMapRoute extends StatefulWidget {
 }
 
 class SelectLocationOnMapRouteState extends State<SelectLocationOnMapRoute> {
+  // The Google Maps map controller
   GoogleMapController _mapController;
 
+  Location _location;
+  String _locationInformationMainText;
+  String _locationInformationSecondaryText;
+
   bool _showPinOnMap;
-
-  LatLng _selectedLocation;
-  String _selectedLocationGeneralAddressText;
-  String _selectedLocationSpecificAddressText;
-
   DateTime _lastTimeOnMapCameraIdleWasCalled;
 
   @override
@@ -26,9 +27,15 @@ class SelectLocationOnMapRouteState extends State<SelectLocationOnMapRoute> {
     super.initState();
 
     // Default initial location is a a place on Quito, Ecuador
-    _selectedLocation = LatLng(-0.179471, -78.467756);
-    _selectedLocationGeneralAddressText = 'Quito, Ecuador';
-    _selectedLocationSpecificAddressText = 'Parque Metropolitano de Quito';
+    _location = Location(-0.179471, -78.467756,
+        country: 'Ecuador',
+        administrativeArea: 'Pichincha',
+        city: 'Quito',
+        streetName: 'Parque Metropolitano de Quito');
+
+    // Example: Quito, Ecuador
+    _locationInformationMainText = _location.city + ', ' + _location.country;
+    _locationInformationSecondaryText = _location.streetName;
 
     // Do not show pin on map on start up. Show it once the map is loaded
     _showPinOnMap = false;
@@ -50,34 +57,11 @@ class SelectLocationOnMapRouteState extends State<SelectLocationOnMapRoute> {
   }
 
   /// Update the LatLng text with every camera move.
-  /// This keeps the variable _selectedLocation synced with the Map
+  /// This keeps the coordinates of _location synced with the Map
   void _onCameraMove(CameraPosition position) {
     setState(() {
-      _selectedLocation = position.target;
-    });
-  }
-
-  /// If 2 seconds has passed since the last user interaction with the map,
-  /// call the geolocator to get an address
-  void _onCameraIdle() {
-    _lastTimeOnMapCameraIdleWasCalled = DateTime.now();
-
-    Future.delayed(
-      const Duration(milliseconds: 2000),
-      () {
-        Duration difference =
-            DateTime.now().difference(_lastTimeOnMapCameraIdleWasCalled);
-        if (difference.inMilliseconds > 2000) {
-          _updateAddressText();
-        }
-      },
-    );
-  }
-
-  void _onCameraMoveStarted() {
-    setState(() {
-      _selectedLocationGeneralAddressText = 'Cargando...';
-      _selectedLocationSpecificAddressText = '';
+      LatLng target = position.target;
+      _location.setCoordinates(target.latitude, target.longitude);
     });
   }
 
@@ -107,32 +91,58 @@ class SelectLocationOnMapRouteState extends State<SelectLocationOnMapRoute> {
     }
   }
 
+  /// If 2 seconds has passed since the last user interaction with the map,
+  /// call the geolocator to get an address
+  void _onCameraIdle() {
+    _lastTimeOnMapCameraIdleWasCalled = DateTime.now();
+
+    Future.delayed(
+      const Duration(milliseconds: 2000),
+      () {
+        Duration difference =
+            DateTime.now().difference(_lastTimeOnMapCameraIdleWasCalled);
+        if (difference.inMilliseconds > 2000) {
+          _updateAddressText();
+        }
+      },
+    );
+  }
+
+  void _onCameraMoveStarted() {
+    setState(() {
+      _locationInformationMainText = 'Cargando...';
+      _locationInformationSecondaryText = '';
+    });
+  }
+
   void _updateAddressText() async {
     try {
       Geolocator()
-          .placemarkFromCoordinates(
-              _selectedLocation.latitude, _selectedLocation.longitude)
+          .placemarkFromCoordinates(_location.latitude, _location.longitude)
           .timeout(Duration(seconds: 10))
           .then(
         (value) {
-          String city = value.last.locality;
           String country = value.last.country;
+          String city = value.last.locality;
           String administrativeArea = value.last.administrativeArea;
           String streetName = value.last.thoroughfare;
 
+          _location.country = country;
+          _location.administrativeArea = administrativeArea;
+          _location.city = city;
+          _location.streetName = streetName;
+
           setState(() {
-
             // If city is null or empty
-            if(city?.isEmpty ?? true){
+            if (city?.isEmpty ?? true) {
               // Display province + country
-              _selectedLocationGeneralAddressText = administrativeArea + ', ' + country;
-            }
-            else
+              _locationInformationMainText =
+                  administrativeArea + ', ' + country;
+            } else
               // Display city + country
-              _selectedLocationGeneralAddressText = city + ', ' + country;
+              _locationInformationMainText = city + ', ' + country;
 
-
-            _selectedLocationSpecificAddressText = streetName;
+            _locationInformationSecondaryText = streetName;
           });
 
           /* EXAMPLES
@@ -176,7 +186,7 @@ class SelectLocationOnMapRouteState extends State<SelectLocationOnMapRoute> {
               _onCameraMoveStarted();
             },
             initialCameraPosition: CameraPosition(
-              target: _selectedLocation,
+              target: _location.getCoordinates(),
               // initial map zoom
               zoom: 7.0,
             ),
@@ -241,22 +251,22 @@ class SelectLocationOnMapRouteState extends State<SelectLocationOnMapRoute> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              Text(_selectedLocationGeneralAddressText,
+              Text(_locationInformationMainText,
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: Dimensions.pageTitles_TextSize,
                       fontWeight: FontWeight.bold)),
               SizedBox(height: 8.0),
-              Text(_selectedLocationSpecificAddressText,
+              Text(_locationInformationSecondaryText,
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: Dimensions.paragraphBodyAndNormalText_TextSize,
                       fontWeight: FontWeight.bold)),
               SizedBox(height: 4.0),
               Text(
-                  _selectedLocation.latitude.toStringAsFixed(6) +
+                  _location.latitude.toStringAsFixed(6) +
                       ', ' +
-                      _selectedLocation.longitude.toStringAsFixed(6),
+                      _location.longitude.toStringAsFixed(6),
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: Dimensions.small_TextSize)),
@@ -266,4 +276,6 @@ class SelectLocationOnMapRouteState extends State<SelectLocationOnMapRoute> {
       ),
     );
   }
+
+  void _onSelectButtonPressed() {}
 }

@@ -1,3 +1,6 @@
+// Replaced by Custom Location
+// TODO: Delete
+
 class Address{
 
   Address(this.city, this.streetName, this.latitude, this.longitude);
