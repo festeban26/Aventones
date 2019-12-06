@@ -322,7 +322,6 @@ class SelectLocationOnMapRouteState extends State<SelectLocationOnMapRoute> {
   /// First, check if all the required fields are loaded into _location, then
   ///  check if the _location is enabled in the application
   void _onSubmitLocationButtonPressed() {
-
     /// The required fields are country, administrativeArea, latitude and longitude.
     /// They are loaded into _location using the geolocator.
     bool isSelectedLocationCompleteWithRequiredFields =
@@ -331,6 +330,7 @@ class SelectLocationOnMapRouteState extends State<SelectLocationOnMapRoute> {
     if (isSelectedLocationCompleteWithRequiredFields) {
       print('All fields loaded');
     }
+
     /// If all the required fields are not yet loaded by the geolocator async call,
     /// then display the modal barrier and check every 500 miliseconds if
     /// the requiered fields are loaded.
@@ -342,9 +342,8 @@ class SelectLocationOnMapRouteState extends State<SelectLocationOnMapRoute> {
       _submittingTimer = Timer.periodic(
         const Duration(milliseconds: 250),
         (timer) {
-          print('timer called');
+          // If all required fields are loaded into _location
           if (Location.isLocationComplete(_location)) {
-            print('Now all fields are loaded');
             print(_location.streetName);
             // Once fields are loaded, cancel the timer
             timer.cancel();
