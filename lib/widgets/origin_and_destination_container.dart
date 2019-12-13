@@ -1,5 +1,6 @@
 import 'package:aventones/res/dimensions.dart';
 import 'package:aventones/routes/select_location.dart';
+import 'package:aventones/routes/select_location_on_autocomplete.dart';
 import 'package:flutter/material.dart';
 import 'package:aventones/res/company_colors.dart';
 
@@ -53,8 +54,11 @@ class OriginAndDestinationContainerState
                     ),
                     Expanded(
                       flex: 70,
-                      child: _originAndDestinationInputs(_originExample,
-                          _destinationExample, widget.isTheContainerAPreview),
+                      child: _originAndDestinationInputs(
+                          context,
+                          _originExample,
+                          _destinationExample,
+                          widget.isTheContainerAPreview),
                     ),
                   ],
                 ),
@@ -93,8 +97,8 @@ Widget _originAndDestinationIcons() {
   );
 }
 
-Widget _originOrDestinationTextWidget(
-    String address, bool isOrigin, bool isTheContainerAPreview) {
+Widget _originOrDestinationTextWidget(BuildContext context, String address,
+    bool isOrigin, bool isTheContainerAPreview) {
   Widget child;
 
   String labelText;
@@ -136,6 +140,12 @@ Widget _originOrDestinationTextWidget(
         labelText: labelText,
         border: InputBorder.none,
       ),
+      onChanged: (text) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => SelectLocationOnAutocomplete()),
+        );
+      },
     );
   } else {
     child = TextFormField(
@@ -152,13 +162,14 @@ Widget _originOrDestinationTextWidget(
   return child;
 }
 
-Widget _originAndDestinationInputs(
-    String origin, String destination, bool isTheContainerAPreview) {
+Widget _originAndDestinationInputs(BuildContext context, String origin,
+    String destination, bool isTheContainerAPreview) {
   return Column(
     children: <Widget>[
-      _originOrDestinationTextWidget(origin, true, isTheContainerAPreview),
       _originOrDestinationTextWidget(
-          destination, false, isTheContainerAPreview),
+          context, origin, true, isTheContainerAPreview),
+      _originOrDestinationTextWidget(
+          context, destination, false, isTheContainerAPreview),
     ],
   );
 }

@@ -20,9 +20,12 @@ class SelectLocationRoute extends StatelessWidget {
             mainAxisSize: MainAxisSize.max,
             children: <Widget>[
               Padding(
-                  padding: const EdgeInsets.only(
-                      left: 16.0, right: 16.0, bottom: 16.0),
-                  child: OriginAndDestinationContainer(isTheContainerAPreview: false,)),
+                padding: const EdgeInsets.only(
+                    left: 16.0, right: 16.0, bottom: 16.0),
+                child: OriginAndDestinationContainer(
+                  isTheContainerAPreview: false,
+                ),
+              ),
               Expanded(
                 child: Container(
                   width: MediaQuery.of(context).size.width,

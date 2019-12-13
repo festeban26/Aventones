@@ -63,35 +63,24 @@ class SelectLocationOnMapRouteState extends State<SelectLocationOnMapRoute> {
     _mapController = controller;
 
     // Update the map location tu user current location
-    _updateLocation();
+    _updateMapsCameraToUserLocation();
 
     // Wait then update the UI by showing the pin
-    Future.delayed(const Duration(milliseconds: 3000), () {
+    Future.delayed(const Duration(milliseconds: 2500), () {
       setState(() {
         _showPinOnMap = true;
       });
     });
   }
 
-  /// Update the LatLng text with every camera move.
-  /// This keeps the coordinates of _location synced with the Map
-  void _onCameraMove(CameraPosition position) {
-    setState(() {
-      LatLng target = position.target;
-
-      // Sets the _location new coordinates
-      _location.setCoordinates(target.latitude, target.longitude);
-    });
-  }
-
-  void _updateLocation() async {
+  void _updateMapsCameraToUserLocation() async {
     try {
       Geolocator()
           .getCurrentPosition(
             desiredAccuracy: LocationAccuracy.medium,
             locationPermissionLevel: GeolocationPermission.locationWhenInUse,
           )
-          .timeout(Duration(seconds: 10))
+          .timeout(Duration(seconds: 5))
           .then(
         (value) {
           // Move the camera to the user position
@@ -110,17 +99,28 @@ class SelectLocationOnMapRouteState extends State<SelectLocationOnMapRoute> {
     }
   }
 
+  /// Update the LatLng text with every camera move.
+  /// This keeps the coordinates of _location synced with the Map
+  void _onCameraMove(CameraPosition position) {
+    setState(() {
+      LatLng target = position.target;
+
+      // Sets the _location new coordinates
+      _location.setCoordinates(target.latitude, target.longitude);
+    });
+  }
+
   /// If 2 seconds has passed since the last user interaction with the map,
   /// call the geolocator to get an address
   void _onCameraIdle() {
     _lastTimeOnMapCameraIdleWasCalled = DateTime.now();
 
     Future.delayed(
-      const Duration(milliseconds: 2000),
+      const Duration(milliseconds: 1500),
       () {
         Duration difference =
             DateTime.now().difference(_lastTimeOnMapCameraIdleWasCalled);
-        if (difference.inMilliseconds > 2000) {
+        if (difference.inMilliseconds > 1500) {
           _updateAddressText();
         }
       },
@@ -137,6 +137,7 @@ class SelectLocationOnMapRouteState extends State<SelectLocationOnMapRoute> {
   }
 
   void _updateAddressText() async {
+
     try {
       Geolocator()
           .placemarkFromCoordinates(_location.latitude, _location.longitude)

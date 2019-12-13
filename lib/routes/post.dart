@@ -32,19 +32,20 @@ class _PostScreenState extends State<PostScreen> {
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   decoration: BoxDecoration(
-                      color: CompanyColors.customLightGray,
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(
-                              Dimensions.BorderRadiusEffect_Radius),
-                          topRight: Radius.circular(
-                              Dimensions.BorderRadiusEffect_Radius)),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black,
-                          blurRadius: Dimensions.BoxShadowEffect_blurRadius,
-                          spreadRadius: Dimensions.BoxShadowEffect_spreadRadius,
-                        )
-                      ]),
+                    color: CompanyColors.customLightGray,
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(
+                            Dimensions.BorderRadiusEffect_Radius),
+                        topRight: Radius.circular(
+                            Dimensions.BorderRadiusEffect_Radius)),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black,
+                        blurRadius: Dimensions.BoxShadowEffect_blurRadius,
+                        spreadRadius: Dimensions.BoxShadowEffect_spreadRadius,
+                      )
+                    ],
+                  ),
                   child: SingleChildScrollView(
                     child: Padding(
                       padding: const EdgeInsets.all(16.0),
@@ -53,7 +54,8 @@ class _PostScreenState extends State<PostScreen> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
                           SizedBox(height: 8),
-                          OriginAndDestinationContainer(isTheContainerAPreview: true),
+                          OriginAndDestinationContainer(
+                              isTheContainerAPreview: true),
                           SizedBox(height: 8),
                           _Preferences(),
                           SizedBox(height: 16),
@@ -72,7 +74,7 @@ class _PostScreenState extends State<PostScreen> {
   }
 }
 
-class _Preferences extends StatelessWidget{
+class _Preferences extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -106,11 +108,10 @@ class _Preferences extends StatelessWidget{
             ),
             SizedBox(width: 8.0),
             Expanded(
-              flex: 1,
-              child: PriceButton(
-                iconColor: CompanyColors.customBlack,
-              )
-            )
+                flex: 1,
+                child: PriceButton(
+                  iconColor: CompanyColors.customBlack,
+                ))
           ],
         )
       ],
@@ -118,7 +119,7 @@ class _Preferences extends StatelessWidget{
   }
 }
 
-class _PostButton extends StatelessWidget{
+class _PostButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -142,20 +143,19 @@ class _PostButton extends StatelessWidget{
   }
 }
 
-
 class _Autocomplete extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Address sampleAddressQuito =
-    Address("Quito", "Gaspar de Villarroel E 12-17", -0.171197, -78.47428);
+        Address("Quito", "Gaspar de Villarroel E 12-17", -0.171197, -78.47428);
     final Address sampleAddressIbarra =
-    Address("Ibarra", "José Larrea 2-40", 0.342901, -78.110276);
+        Address("Ibarra", "José Larrea 2-40", 0.342901, -78.110276);
 
     final Trip sampleTrip1 =
-    Trip(sampleAddressIbarra, sampleAddressQuito, DateTime.now(), 3, 5.55);
+        Trip(sampleAddressIbarra, sampleAddressQuito, DateTime.now(), 3, 5.55);
 
     final Trip sampleTrip2 =
-    Trip(sampleAddressQuito, sampleAddressIbarra, DateTime.now(), 3, 4.55);
+        Trip(sampleAddressQuito, sampleAddressIbarra, DateTime.now(), 3, 4.55);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -203,6 +203,3 @@ class _Autocomplete extends StatelessWidget {
     );
   }
 }
-
-
-

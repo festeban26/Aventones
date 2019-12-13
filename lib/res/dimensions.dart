@@ -15,8 +15,8 @@ class Dimensions {
   static const double menuItem_TextSize = 14.0;
 
   // Routes stack elevation
-  static const double BoxShadowEffect_blurRadius = 10.0;
-  static const double BoxShadowEffect_spreadRadius = 5.0;
+  static const double BoxShadowEffect_blurRadius = 6.0;
+  static const double BoxShadowEffect_spreadRadius = 3.0;
 
   // Border Radius Effect
   static const double BorderRadiusEffect_Radius = 32.0;
