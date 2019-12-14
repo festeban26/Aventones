@@ -84,10 +84,10 @@ class GooglePlacesApiAutocomplete {
       _currentUuid = Uuid().v4();
       print(_lastTimeUuidWasGenerated.toIso8601String());
     }
-    /// If 3 minutes has passed since the UUID was generated, generate another
-    /// UUID due to Google Places API UUID time lifespan (3min between calls with
+    /// If 5 minutes has passed since the UUID was generated, generate another
+    /// UUID due to Google Places API UUID time lifespan (5 min between calls with
     /// the same UUID).
-    else if(DateTime.now().difference(_lastTimeUuidWasGenerated) > Duration(minutes: 3)){
+    else if(DateTime.now().difference(_lastTimeUuidWasGenerated) > Duration(minutes: 5)){
       _lastTimeUuidWasGenerated = DateTime.now();
       _currentUuid = Uuid().v4();
     }

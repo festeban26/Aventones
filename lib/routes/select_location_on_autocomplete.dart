@@ -56,7 +56,14 @@ class SelectLocationOnAutocompleteState
                         suffixIcon: IconButton(
                           icon: Icon(Icons.clear),
                           onPressed: () {
-                            _textEditingController.clear();
+                            setState(() {
+                              _googlePlacesPredictions.clear();
+                            });
+
+                            // Has to be like it because of flutter issue 35848
+                            Future.delayed(Duration(milliseconds: 50)).then((_){
+                              _textEditingController.clear();
+                            });
                           },
                         ),
                       ),
@@ -76,39 +83,49 @@ class SelectLocationOnAutocompleteState
               ),
             ),
             Expanded(
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(
-                  color: CompanyColors.customLightGray,
-                  borderRadius: BorderRadius.only(
-                      topLeft:
-                          Radius.circular(Dimensions.BorderRadiusEffect_Radius),
-                      topRight: Radius.circular(
-                          Dimensions.BorderRadiusEffect_Radius)),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black,
-                      blurRadius: Dimensions.BoxShadowEffect_blurRadius,
-                      spreadRadius: Dimensions.BoxShadowEffect_spreadRadius,
-                    )
-                  ],
+              child: ClipRRect(
+                borderRadius: BorderRadius.only(
+                  topLeft:
+                      Radius.circular(Dimensions.BorderRadiusEffect_Radius),
+                  topRight:
+                      Radius.circular(Dimensions.BorderRadiusEffect_Radius),
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: ListView.separated(
-                    itemCount: _googlePlacesPredictions.length,
-                    itemBuilder: ((context, index) {
-
-                      var prediction = _googlePlacesPredictions[index];
-                      return ListTile(
-                        title: Text(prediction.mainText),
-                        subtitle: Text(prediction.description),
-                        dense: true,
-                      );
-                    }),
-                    separatorBuilder: (context, index){
-                      return Divider();
-                    },
+                child: Container(
+                  color: Colors.white,
+                  child: Material(
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 4.0),
+                      child: ListView.separated(
+                        itemCount: _googlePlacesPredictions.length,
+                        itemBuilder: ((context, index) {
+                          var prediction = _googlePlacesPredictions[index];
+                          return ListTile(
+                            title: Text(
+                              prediction.mainText,
+                              style: TextStyle(
+                                fontSize: Dimensions.listItemNormal_TextSize,
+                              ),
+                            ),
+                            subtitle: Text(
+                              prediction.secondaryText,
+                              style: TextStyle(
+                                fontSize: Dimensions.small_TextSize,
+                              ),
+                            ),
+                            leading: Icon(Icons.location_on,
+                            size: 40.0,
+                            color: CompanyColors.customBlack,),
+                            dense: true,
+                            onTap: () {
+                              print('test');
+                            },
+                          );
+                        }),
+                        separatorBuilder: (context, index) {
+                          return Divider();
+                        },
+                      ),
+                    ),
                   ),
                 ),
               ),
