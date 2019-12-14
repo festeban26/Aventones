@@ -1,3 +1,5 @@
+import 'package:aventones/helpers/places_api_autocomplete.dart';
+import 'package:aventones/models/google_autocomplete_place.dart';
 import 'package:aventones/res/company_colors.dart';
 import 'package:aventones/res/dimensions.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +11,10 @@ class SelectLocationOnAutocomplete extends StatefulWidget {
 
 class SelectLocationOnAutocompleteState
     extends State<SelectLocationOnAutocomplete> {
+  final TextEditingController _textEditingController =
+      new TextEditingController();
+  List<GoogleAutocompletePlace> _googlePlacesPredictions = List();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,15 +50,25 @@ class SelectLocationOnAutocompleteState
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(24.0),
                         ),
-                        contentPadding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 16.0),
+                        contentPadding: const EdgeInsets.symmetric(
+                            vertical: 0.0, horizontal: 16.0),
                         fillColor: CompanyColors.customLightGray,
                         suffixIcon: IconButton(
                           icon: Icon(Icons.clear),
-                          onPressed: () {},
+                          onPressed: () {
+                            _textEditingController.clear();
+                          },
                         ),
                       ),
-                      onChanged: (text){
-                        print(text);
+                      controller: _textEditingController,
+                      onChanged: (text) {
+                        GooglePlacesApiAutocomplete.autocomplete(text)
+                            .then((predictions) {
+                          setState(() {
+                            if (predictions != null)
+                              _googlePlacesPredictions = predictions;
+                          });
+                        });
                       },
                     ),
                   ),
@@ -76,6 +92,24 @@ class SelectLocationOnAutocompleteState
                       spreadRadius: Dimensions.BoxShadowEffect_spreadRadius,
                     )
                   ],
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: ListView.separated(
+                    itemCount: _googlePlacesPredictions.length,
+                    itemBuilder: ((context, index) {
+
+                      var prediction = _googlePlacesPredictions[index];
+                      return ListTile(
+                        title: Text(prediction.mainText),
+                        subtitle: Text(prediction.description),
+                        dense: true,
+                      );
+                    }),
+                    separatorBuilder: (context, index){
+                      return Divider();
+                    },
+                  ),
                 ),
               ),
             ),
