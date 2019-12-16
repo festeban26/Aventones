@@ -42,7 +42,7 @@ class Location {
     if (longitude <= 180.0 && longitude >= -180.0) this.longitude = longitude;
   }
 
-  LatLng getCoordinates() {
+  LatLng get coordinates{
     return LatLng(latitude, longitude);
   }
 
