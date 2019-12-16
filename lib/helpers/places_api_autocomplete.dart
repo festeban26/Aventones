@@ -39,7 +39,7 @@ class GooglePlacesApiAutocomplete {
     // Add the session token
     url += '&sessiontoken=${_getUuid()}';
 
-    try{
+    try {
       final response = await http.get(url);
 
       // Parsing process
@@ -49,20 +49,30 @@ class GooglePlacesApiAutocomplete {
 
       // Parsing process to get Place ID coordinates
 
-      // SOme validation and if data if correct, reset the session token
-      _mustResetSessionToken = true;
-      // TODO
-      return null;
+      // If there was an error
+      if (json['error_message'] != null) {
+        // TODO Error handling
+        print(json['error_message']);
+      } else {
+        final result = json['result'];
+        final geometry = result['geometry'];
+        final location = geometry['location'];
+        double latitude = double.parse(location['lat']);
+        double longitude = double.parse(location['lng']);
 
-    } catch(e){
+        // reset the session token
+        _mustResetSessionToken = true;
+        return LatLng(latitude, longitude);
+      }
+    } catch (e) {
       // TODO error handling
       print(e);
     }
     return null;
   }
 
-  static Future<List<GoogleAutocompletePlace>> autocomplete(String input) async {
-
+  static Future<List<GoogleAutocompletePlace>> autocomplete(
+      String input) async {
     if (input.length > 0) {
 
       String url = 'https://maps.googleapis.com/maps/api/place/autocomplete/';
@@ -96,17 +106,15 @@ class GooglePlacesApiAutocomplete {
 
       final Map<String, dynamic> json = JSON.jsonDecode(response.body);
       // If there was an error
-      if(json['error_message'] != null){
+      if (json['error_message'] != null) {
         // TODO Error handling
         print(json['error_message']);
-        return null;
-      }
-      else{
+      } else {
         final predictions = json['predictions'];
 
         List<GoogleAutocompletePlace> predictedPlaces = List();
 
-        for(Map<String, dynamic> prediction in predictions){
+        for (Map<String, dynamic> prediction in predictions) {
           var place = GoogleAutocompletePlace(prediction);
           predictedPlaces.add(place);
         }
@@ -117,18 +125,14 @@ class GooglePlacesApiAutocomplete {
     return null;
   }
 
-  static void _resetSessionToken(){
-
-  }
-
-  static String _getUuid(){
-    if(_lastTimeUuidWasGenerated == null || _currentUuid == null){
+  static String _getUuid() {
+    if (_lastTimeUuidWasGenerated == null || _currentUuid == null) {
       _lastTimeUuidWasGenerated = DateTime.now();
       _currentUuid = Uuid().v4();
     }
     // If the session token was used to request place basic data, the token must
     // be reset.
-    else if(_mustResetSessionToken){
+    else if (_mustResetSessionToken) {
       _lastTimeUuidWasGenerated = DateTime.now();
       _currentUuid = Uuid().v4();
       _mustResetSessionToken = false;
@@ -136,7 +140,8 @@ class GooglePlacesApiAutocomplete {
     /// If 5 minutes has passed since the UUID was generated, generate another
     /// UUID due to Google Places API UUID time lifespan (5 min between calls with
     /// the same UUID).
-    else if(DateTime.now().difference(_lastTimeUuidWasGenerated) > Duration(minutes: 5)){
+    else if (DateTime.now().difference(_lastTimeUuidWasGenerated) >
+        Duration(minutes: 5)) {
       _lastTimeUuidWasGenerated = DateTime.now();
       _currentUuid = Uuid().v4();
     }
