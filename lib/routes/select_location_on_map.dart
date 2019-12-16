@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:aventones/helpers/GeolocatorHelper.dart';
+import 'package:aventones/helpers/geolocator_helper.dart';
 import 'package:aventones/models/location.dart';
 import 'package:aventones/res/company_colors.dart';
 import 'package:aventones/res/dimensions.dart';
