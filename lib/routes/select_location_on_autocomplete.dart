@@ -126,8 +126,9 @@ class SelectLocationOnAutocompleteState
                                       ),
                                       dense: true,
                                       onTap: () {
-                                        print(
-                                            'Clicked on place with id: ${_googlePlacesPredictions[index].placeId}');
+                                        // Clicked on place with id: _googlePlacesPredictions[index].placeId
+                                        String placeId = _googlePlacesPredictions[index].placeId;
+                                        GooglePlacesApiAutocomplete.getCoordinates(placeId);
                                       },
                                     );
                                   }),
