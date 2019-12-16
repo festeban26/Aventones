@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:aventones/helpers/GeolocatorHelper.dart';
 import 'package:aventones/models/location.dart';
 import 'package:aventones/res/company_colors.dart';
 import 'package:aventones/res/dimensions.dart';
@@ -23,6 +24,8 @@ class SelectLocationOnMapRouteState extends State<SelectLocationOnMapRoute> {
 
   bool _showPinOnMap;
   DateTime _lastTimeOnMapCameraIdleWasCalled;
+
+  DateTime _onMapCreatedTime;
 
   /// This timer is used when the submit button is pressed and the app has
   /// to periodically check if the geolocator data is loaded before continuing
@@ -65,6 +68,9 @@ class SelectLocationOnMapRouteState extends State<SelectLocationOnMapRoute> {
     // Update the map location tu user current location
     _updateMapsCameraToUserLocation();
 
+    // Set the timestamp for the map creation time
+    _onMapCreatedTime = DateTime.now();
+
     // Wait then update the UI by showing the pin
     Future.delayed(const Duration(milliseconds: 2500), () {
       setState(() {
@@ -80,7 +86,7 @@ class SelectLocationOnMapRouteState extends State<SelectLocationOnMapRoute> {
             desiredAccuracy: LocationAccuracy.medium,
             locationPermissionLevel: GeolocationPermission.locationWhenInUse,
           )
-          .timeout(Duration(seconds: 5))
+          .timeout(Duration(seconds: 10))
           .then(
         (value) {
           // Move the camera to the user position
@@ -110,21 +116,50 @@ class SelectLocationOnMapRouteState extends State<SelectLocationOnMapRoute> {
     });
   }
 
-  /// If 2 seconds has passed since the last user interaction with the map,
-  /// call the geolocator to get an address
+
   void _onCameraIdle() {
+
+    // _onCameraIdle() gets called multiple times times when user is interacting
+    // with the map while trying to set the pin on the map to his desired location.
+    // On a group of request in a time interval of (2 sec), the app will only
+    // request Geocoder data on the last call.
+    //
+    // It works like this: once the _onCameraIdle() is called, register the current
+    // time. Then call a future (0.5 sec) and check in the future if another called
+    // has been made. If another call has been made, do nothing. Else, request data
+    // to the geocoder
+    // .
+
+    // Register the time of the call (it will only register the last call time)
     _lastTimeOnMapCameraIdleWasCalled = DateTime.now();
 
-    Future.delayed(
-      const Duration(milliseconds: 1500),
-      () {
-        Duration difference =
-            DateTime.now().difference(_lastTimeOnMapCameraIdleWasCalled);
-        if (difference.inMilliseconds > 1500) {
-          _updateAddressText();
-        }
-      },
-    );
+    const Duration timeToRunInTheFuture = Duration(milliseconds: 500);
+
+    // Run in 0.5 sec into the future
+    Future.delayed(timeToRunInTheFuture, (){
+
+      Duration difference = DateTime.now().difference(_lastTimeOnMapCameraIdleWasCalled);
+
+      // Give 50 extra milliseconds
+      if(difference.inMilliseconds < timeToRunInTheFuture.inMilliseconds){
+        // The user has moved the camera again so set the UI text to "Cargando"
+        setState(() {
+          _locationInformationMainText = 'Cargando...';
+          _locationInformationSecondaryText = '';
+        });
+      }
+      else{
+        GeolocatorHelper.getLocationModelDataFromLatLng(_location.coordinates).then((onValue){
+          // If the return data from the Geocoder is not null
+          if(onValue != null){
+            // Update the _location with the Geocoder data
+            _location = onValue;
+            // Update the UI
+            _updateAddressText();
+          }
+        });
+      }
+    });
   }
 
   void _onCameraMoveStarted() {
@@ -137,54 +172,19 @@ class SelectLocationOnMapRouteState extends State<SelectLocationOnMapRoute> {
   }
 
   void _updateAddressText() async {
+    setState(() {
+      // If city is null or empty
+      if (_location.city?.isEmpty ?? true) {
+        // Display province + country
+        _locationInformationMainText =
+            _location.administrativeArea + ', ' + _location.country;
+      } else
+        // Display city + country
+        _locationInformationMainText =
+            _location.city + ', ' + _location.country;
 
-    try {
-      Geolocator()
-          .placemarkFromCoordinates(_location.latitude, _location.longitude)
-          .timeout(Duration(seconds: 10))
-          .then(
-        (value) {
-          String country = value.last.country;
-          String city = value.last.locality;
-          String administrativeArea = value.last.administrativeArea;
-          String streetName = value.last.thoroughfare;
-
-          _location.country = country;
-          _location.administrativeArea = administrativeArea;
-          _location.city = city;
-          _location.streetName = streetName;
-
-          setState(() {
-            // If city is null or empty
-            if (city?.isEmpty ?? true) {
-              // Display province + country
-              _locationInformationMainText =
-                  administrativeArea + ', ' + country;
-            } else
-              // Display city + country
-              _locationInformationMainText = city + ', ' + country;
-
-            _locationInformationSecondaryText = streetName;
-          });
-
-          /* EXAMPLES
-          print('name: ' + value.last.name); // 3
-          print('country: ' + value.last.country); // Ecuador
-          print('postalCode: ' + value.last.postalCode); // 'Empty'
-          print('administrativeArea: ' + value.last.administrativeArea); // Provincia de Imbabura
-          print('subAdministrativeArea: ' + value.last.subAdministrativeArea); // Ibarra
-          print('locality: ' + value.last.locality); // Ibarra
-          print('subLocality: ' + value.last.subLocality); // Parroquia el Sagrario
-          print('thoroughfare: ' + value.last.thoroughfare); // José María Larrea y Jijón
-          print('subThoroughfare: ' + value.last.subThoroughfare); // 3
-           */
-        },
-      );
-    }
-    // TODO
-    catch (e) {
-      print('Error: ${e.toString()}');
-    }
+      _locationInformationSecondaryText = _location.streetName;
+    });
   }
 
   @override
@@ -209,7 +209,7 @@ class SelectLocationOnMapRouteState extends State<SelectLocationOnMapRoute> {
                   _onCameraMoveStarted();
                 },
                 initialCameraPosition: CameraPosition(
-                  target: _location.getCoordinates(),
+                  target: _location.coordinates,
                   // initial map zoom
                   zoom: 7.0,
                 ),
