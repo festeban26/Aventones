@@ -61,7 +61,8 @@ class SelectLocationOnAutocompleteState
                             });
 
                             // Has to be like it because of flutter issue 35848
-                            Future.delayed(Duration(milliseconds: 50)).then((_){
+                            Future.delayed(Duration(milliseconds: 50))
+                                .then((_) {
                               _textEditingController.clear();
                             });
                           },
@@ -95,41 +96,86 @@ class SelectLocationOnAutocompleteState
                   child: Material(
                     child: Padding(
                       padding: const EdgeInsets.only(top: 4.0),
-                      child: ListView.separated(
-                        itemCount: _googlePlacesPredictions.length,
-                        itemBuilder: ((context, index) {
-                          var prediction = _googlePlacesPredictions[index];
-                          return ListTile(
-                            title: Text(
-                              prediction.mainText,
-                              style: TextStyle(
-                                fontSize: Dimensions.listItemNormal_TextSize,
-                              ),
-                            ),
-                            subtitle: Text(
-                              prediction.secondaryText,
-                              style: TextStyle(
-                                fontSize: Dimensions.small_TextSize,
-                              ),
-                            ),
-                            leading: Icon(Icons.location_on,
-                            size: 40.0,
-                            color: CompanyColors.customBlack,),
-                            dense: true,
-                            onTap: () {
-                              print('test');
-                            },
-                          );
-                        }),
-                        separatorBuilder: (context, index) {
-                          return Divider();
-                        },
-                      ),
+                      child:
+                          // If there was no places, show text
+                          _googlePlacesPredictions.length == 0
+                              ? _EmptyResultsMessageWidget()
+                              : ListView.separated(
+                                  itemCount: _googlePlacesPredictions.length,
+                                  itemBuilder: ((context, index) {
+                                    var prediction =
+                                        _googlePlacesPredictions[index];
+                                    return ListTile(
+                                      title: Text(
+                                        prediction.mainText,
+                                        style: TextStyle(
+                                          fontSize: Dimensions
+                                              .listItemNormal_TextSize,
+                                        ),
+                                      ),
+                                      subtitle: Text(
+                                        prediction.secondaryText,
+                                        style: TextStyle(
+                                          fontSize: Dimensions.small_TextSize,
+                                        ),
+                                      ),
+                                      leading: Icon(
+                                        Icons.location_on,
+                                        size: 40.0,
+                                        color: CompanyColors.customBlack,
+                                      ),
+                                      dense: true,
+                                      onTap: () {
+                                        print(
+                                            'Clicked on place with id: ${_googlePlacesPredictions[index].placeId}');
+                                      },
+                                    );
+                                  }),
+                                  separatorBuilder: (context, index) {
+                                    return Divider();
+                                  },
+                                ),
                     ),
                   ),
                 ),
               ),
             ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _EmptyResultsMessageWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: IntrinsicHeight(
+        child: Column(
+          children: <Widget>[
+            Image(
+              image: AssetImage("assets/no_autocomplete_places_results.gif"),
+              width: MediaQuery.of(context).size.width * 0.9,
+              fit: BoxFit.contain,
+            ),
+            Text(
+              'No se encontraron resultados para tu dirección',
+              style: TextStyle(
+                  fontSize: Dimensions.modalText_TextSize,
+                  fontWeight: FontWeight.bold),
+            ),
+            SizedBox(
+              height: 4,
+            ),
+            Text(
+              'Intenta con otros términos de búsqueda',
+              style: TextStyle(
+                fontSize: Dimensions.paragraphBodyAndNormalText_TextSize,
+              ),
+            ),
+            // To force the GIF a little bit upwards. Number 50 was arbitrary selected
+            SizedBox(height: 50,)
           ],
         ),
       ),
