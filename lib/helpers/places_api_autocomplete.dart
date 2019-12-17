@@ -19,7 +19,7 @@ class GooglePlacesApiAutocomplete {
   static String _currentUuid;
   static bool _mustResetSessionToken = false;
 
-  static Future<LatLng> getCoordinates(String placeId) async {
+  static Future<LatLng> getCoordinatesOfPlaceId(String placeId) async {
 
     String url = 'https://maps.googleapis.com/maps/api/place/details/';
 
@@ -45,7 +45,6 @@ class GooglePlacesApiAutocomplete {
       // Parsing process
 
       final Map<String, dynamic> json = JSON.jsonDecode(response.body);
-      print(json);
 
       // Parsing process to get Place ID coordinates
 
@@ -56,9 +55,10 @@ class GooglePlacesApiAutocomplete {
       } else {
         final result = json['result'];
         final geometry = result['geometry'];
+
         final location = geometry['location'];
-        double latitude = double.parse(location['lat']);
-        double longitude = double.parse(location['lng']);
+        double latitude = location['lat'];
+        double longitude = location['lng'];
 
         // reset the session token
         _mustResetSessionToken = true;
