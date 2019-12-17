@@ -5,16 +5,20 @@ import 'package:flutter/material.dart';
 import 'package:aventones/res/company_colors.dart';
 
 class OriginAndDestinationContainer extends StatefulWidget {
-  OriginAndDestinationContainer({Key key, this.isTheContainerAPreview})
+  final bool isTheContainerAPreview;
+  final bool wasAutoFocusRequestedOnOrigin;
+
+  const OriginAndDestinationContainer(
+      {Key key,
+      this.isTheContainerAPreview,
+      this.wasAutoFocusRequestedOnOrigin = true})
       : super(key: key);
 
-  final bool isTheContainerAPreview;
-
   @override
-  State<StatefulWidget> createState() => OriginAndDestinationContainerState();
+  State<StatefulWidget> createState() => _OriginAndDestinationContainerState();
 }
 
-class OriginAndDestinationContainerState
+class _OriginAndDestinationContainerState
     extends State<OriginAndDestinationContainer> {
   String _originExample;
   String _destinationExample;
@@ -44,17 +48,19 @@ class OriginAndDestinationContainerState
                     children: <Widget>[
                       Expanded(
                         flex: 15,
-                        child: OriginAndDestinationIcons(),
+                        child: _OriginAndDestinationIcons(),
                       ),
                       SizedBox(
                         width: 16,
                       ),
                       Expanded(
                         flex: 85,
-                        child: OriginAndDestinationTextContainer(
+                        child: _OriginAndDestinationTextContainer(
                           originText: _originExample,
                           destinationText: _destinationExample,
                           isTheContainerAPreview: widget.isTheContainerAPreview,
+                          wasAutoFocusRequestedOnOrigin:
+                              widget.wasAutoFocusRequestedOnOrigin,
                         ),
                       ),
                     ],
@@ -82,8 +88,11 @@ class OriginAndDestinationContainerState
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) =>
-                                                SelectLocationRoute()),
+                                          builder: (context) =>
+                                              SelectLocationRoute(
+                                            wasAutoFocusRequestedOnOrigin: true,
+                                          ),
+                                        ),
                                       );
                                     },
                                   ),
@@ -102,8 +111,11 @@ class OriginAndDestinationContainerState
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) =>
-                                                SelectLocationRoute()),
+                                          builder: (context) =>
+                                              SelectLocationRoute(
+                                            wasAutoFocusRequestedOnOrigin: false,
+                                          ),
+                                        ),
                                       );
                                     },
                                   ),
@@ -145,7 +157,7 @@ class OriginAndDestinationContainerState
   }
 }
 
-class OriginAndDestinationIcons extends StatelessWidget {
+class _OriginAndDestinationIcons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -167,95 +179,125 @@ class OriginAndDestinationIcons extends StatelessWidget {
   }
 }
 
-class OriginAndDestinationTextContainer extends StatelessWidget {
+class _OriginAndDestinationTextContainer extends StatelessWidget {
   final String originText;
   final String destinationText;
   final bool isTheContainerAPreview;
+  final bool wasAutoFocusRequestedOnOrigin;
 
-  const OriginAndDestinationTextContainer(
-      {Key key,
-      this.originText,
-      this.destinationText,
-      this.isTheContainerAPreview})
-      : super(key: key);
+  const _OriginAndDestinationTextContainer({
+    Key key,
+    this.originText,
+    this.destinationText,
+    this.isTheContainerAPreview,
+    this.wasAutoFocusRequestedOnOrigin,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        _originOrDestinationTextWidget(
-            context, originText, true, isTheContainerAPreview),
-        _originOrDestinationTextWidget(
-            context, destinationText, false, isTheContainerAPreview),
+        _OriginOrDestinationTextWidget(
+          addressText: this.originText,
+          isOrigin: true,
+          isTheContainerAPreview: this.isTheContainerAPreview,
+          wasAutoFocusRequestedOnOrigin: this.wasAutoFocusRequestedOnOrigin,
+        ),
+        _OriginOrDestinationTextWidget(
+          addressText: this.destinationText,
+          isOrigin: false,
+          isTheContainerAPreview: this.isTheContainerAPreview,
+          wasAutoFocusRequestedOnOrigin: this.wasAutoFocusRequestedOnOrigin,
+        ),
       ],
     );
   }
 }
 
-Widget _originOrDestinationTextWidget(BuildContext context, String address,
-    bool isOrigin, bool isTheContainerAPreview) {
-  Widget child;
+class _OriginOrDestinationTextWidget extends StatelessWidget {
+  final String addressText;
+  final bool isOrigin;
+  final bool isTheContainerAPreview;
+  final bool wasAutoFocusRequestedOnOrigin;
 
-  String labelText;
-  String hintText;
+  const _OriginOrDestinationTextWidget({
+    Key key,
+    this.addressText,
+    this.isOrigin,
+    this.isTheContainerAPreview,
+    this.wasAutoFocusRequestedOnOrigin,
+  }) : super(key: key);
 
-  if (isOrigin) {
-    labelText = 'Origen';
-    hintText = 'Selecciona tu origen';
-  } else {
-    labelText = 'Destino';
-    hintText = 'Selecciona tu destino';
-  }
+  @override
+  Widget build(BuildContext context) {
+    String labelText;
+    String hintText;
 
-  // If there is no address
-  if (address?.isEmpty ?? true) {
-    child = TextFormField(
-      initialValue: (() {
-        if (isTheContainerAPreview)
-          return hintText;
-        else
-          return '';
-      }()),
-      // If the container is a preview, disable editing
-      enabled: (() {
-        if (isTheContainerAPreview)
+    if (this.isOrigin) {
+      labelText = 'Origen';
+      hintText = 'Selecciona tu origen';
+    } else {
+      labelText = 'Destino';
+      hintText = 'Selecciona tu destino';
+    }
+
+    if (this.addressText?.isEmpty ?? true) {
+      return TextFormField(
+        initialValue: (() {
+          if (this.isTheContainerAPreview)
+            return hintText;
+          else
+            return '';
+        }()),
+        // If the container is a preview, disable editing
+        enabled: (() {
+          if (this.isTheContainerAPreview)
+            return false;
+          else
+            return true;
+        }()),
+        autofocus: (() {
+          // Only if the container is not a preview
+          if(!this.isTheContainerAPreview){
+            // If auto focus was requested on origin and this is the origin: Acquire auto focus
+            if(this.wasAutoFocusRequestedOnOrigin && this.isOrigin)
+              return true;
+            // If auto focus was requested on destination and this is the destination: Acquire auto focus
+            else if(!this.wasAutoFocusRequestedOnOrigin && !this.isOrigin)
+              return true;
+
+          }
+          // In any other conditions, do not acquire auto focus
           return false;
-        else
-          return true;
-      }()),
-      autofocus: (() {
-        if (!isTheContainerAPreview && isOrigin)
-          return true;
-        else
-          return false;
-      }()),
-      keyboardType: TextInputType.text,
-      decoration: InputDecoration(
-        hintText: hintText,
-        labelText: labelText,
-        border: InputBorder.none,
-      ),
-      onChanged: (text) {
-        // If the text change, it means the user is entering data.
-        // TODO
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => SelectLocationOnAutocomplete()),
-        );
-      },
-    );
-  } else {
-    child = TextFormField(
-      initialValue: hintText,
-      enabled: false,
-      keyboardType: TextInputType.text,
-      decoration: InputDecoration(
-        hintText: hintText,
-        labelText: labelText,
-        border: InputBorder.none,
-      ),
-    );
+
+        }()),
+        keyboardType: TextInputType.text,
+        decoration: InputDecoration(
+          hintText: hintText,
+          labelText: labelText,
+          border: InputBorder.none,
+        ),
+        onChanged: (text) {
+          // If the text change, it means the user is entering data.
+          // TODO
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => SelectLocationOnAutocomplete()),
+          );
+        },
+      );
+    } else {
+      return TextFormField(
+        initialValue: hintText,
+        enabled: false,
+        keyboardType: TextInputType.text,
+        decoration: InputDecoration(
+          hintText: hintText,
+          labelText: labelText,
+          border: InputBorder.none,
+        ),
+      );
+    }
   }
-  return child;
 }
