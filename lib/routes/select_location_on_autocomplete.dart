@@ -6,15 +6,39 @@ import 'package:aventones/res/dimensions.dart';
 import 'package:flutter/material.dart';
 
 class SelectLocationOnAutocomplete extends StatefulWidget {
+  final String startSearchTermString;
+
+  const SelectLocationOnAutocomplete({Key key, this.startSearchTermString})
+      : super(key: key);
+
   @override
   State<StatefulWidget> createState() => SelectLocationOnAutocompleteState();
 }
 
 class SelectLocationOnAutocompleteState
     extends State<SelectLocationOnAutocomplete> {
-  final TextEditingController _textEditingController =
-      new TextEditingController();
   List<GoogleAutocompletePlace> _googlePlacesPredictions = List();
+  TextEditingController _searchTextEditingController;
+
+  @override
+  void initState() {
+    super.initState();
+    // Initialize the Text Editing Controller
+    _searchTextEditingController = TextEditingController();
+
+    // If a starting search text was supplied to this widget, set the search text
+    // to its value.
+    if (widget.startSearchTermString != null) {
+      _searchTextEditingController.text = widget.startSearchTermString;
+    }
+  }
+
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is removed from the widget tree
+    _searchTextEditingController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,12 +88,12 @@ class SelectLocationOnAutocompleteState
                             // Has to be like it because of flutter issue 35848
                             Future.delayed(Duration(milliseconds: 50))
                                 .then((_) {
-                              _textEditingController.clear();
+                              _searchTextEditingController.clear();
                             });
                           },
                         ),
                       ),
-                      controller: _textEditingController,
+                      controller: _searchTextEditingController,
                       onChanged: (text) {
                         GooglePlacesApiAutocomplete.autocomplete(text)
                             .then((predictions) {
@@ -132,14 +156,15 @@ class SelectLocationOnAutocompleteState
                                             _googlePlacesPredictions[index]
                                                 .placeId;
                                         GooglePlacesApiAutocomplete
-                                                .getCoordinatesOfPlaceId(placeId)
+                                                .getCoordinatesOfPlaceId(
+                                                    placeId)
                                             .then((latLng) {
                                           if (latLng != null) {
                                             GeolocatorHelper
                                                     .getLocationModelDataFromLatLng(
                                                         latLng)
                                                 .then((location) {
-                                                  // TODO location ready
+                                              // TODO location ready
                                               print(location.streetName);
                                             });
                                           }
@@ -161,6 +186,8 @@ class SelectLocationOnAutocompleteState
       ),
     );
   }
+
+
 }
 
 class _EmptyResultsMessageWidget extends StatelessWidget {
