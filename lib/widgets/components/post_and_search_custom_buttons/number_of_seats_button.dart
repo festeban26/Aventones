@@ -26,7 +26,7 @@ class _NumberOfSeatsButtonState extends State<NumberOfSeatsButton> {
       onTap: () {
         showDialog(
           context: context,
-          builder: (_) => SelectNumberOfSeatsDialog(
+          builder: (_) => _SelectNumberOfSeatsDialog(
             onValueSelected: (int value){
               setState(() {
                 _selectedNumberOfAvailableSeats = value;
@@ -39,21 +39,21 @@ class _NumberOfSeatsButtonState extends State<NumberOfSeatsButton> {
   }
 }
 
-class SelectNumberOfSeatsDialog extends StatefulWidget {
-  SelectNumberOfSeatsDialog({this.onValueSelected});
+class _SelectNumberOfSeatsDialog extends StatefulWidget {
+  _SelectNumberOfSeatsDialog({this.onValueSelected});
 
   final _DialogCallback onValueSelected;
 
   @override
   State<StatefulWidget> createState() =>
-      SelectNumberOfSeatsDialogState(onValueSelect: onValueSelected);
+      _SelectNumberOfSeatsDialogState(onValueSelect: onValueSelected);
 }
 
 typedef _DialogCallback = void Function(int selectedValue);
 
-class SelectNumberOfSeatsDialogState extends State<SelectNumberOfSeatsDialog>
+class _SelectNumberOfSeatsDialogState extends State<_SelectNumberOfSeatsDialog>
     with SingleTickerProviderStateMixin {
-  SelectNumberOfSeatsDialogState({this.onValueSelect});
+  _SelectNumberOfSeatsDialogState({this.onValueSelect});
 
   final _DialogCallback onValueSelect;
 

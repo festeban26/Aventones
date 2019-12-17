@@ -1,7 +1,6 @@
 import 'package:aventones/widgets/drawer/circular_image.dart';
 import 'package:aventones/widgets/drawer/zoom_scaffold.dart';
 import 'package:aventones/res/company_colors.dart';
-import 'package:aventones/tmp/test.dart';
 import 'package:aventones/routes/post.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -12,11 +11,11 @@ class MenuScreen extends StatelessWidget {
       "https://graph.facebook.com/1244336338/picture?type=normal";
 
   final List<MenuItem> options = [
-    MenuItem(Icons.search, 'Buscar un viaje', SecondRoute()),
+    MenuItem(Icons.search, 'Buscar un viaje', null),
     MenuItem(Icons.add, 'Publicar un viaje', PostScreen()),
-    MenuItem(Icons.directions_car, 'Mis viajes', SecondRoute()),
-    MenuItem(Icons.mail, 'Mensajes', SecondRoute()),
-    MenuItem(Icons.android, 'Test Route', TestRoute()),
+    MenuItem(Icons.directions_car, 'Mis viajes', null),
+    MenuItem(Icons.mail, 'Mensajes', null),
+    MenuItem(Icons.android, 'Test Route', null),
   ];
 
   @override
@@ -121,13 +120,6 @@ class MenuScreen extends StatelessWidget {
             ),
             Spacer(),
             ListTile(
-              onTap: () {
-                Provider.of<MenuController>(context, listen: true).toggle();
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => SecondRoute()),
-                );
-              },
               leading: Icon(
                 Icons.settings,
                 color: CompanyColors.customWhite,
@@ -139,10 +131,12 @@ class MenuScreen extends StatelessWidget {
             ),
             ListTile(
               onTap: () {
+                Provider.of<MenuController>(context, listen: true).toggle();
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => FacebookLoginScreen()),
+                    builder: (context) => FacebookLoginScreen(),
+                  ),
                 );
               },
               leading: Icon(

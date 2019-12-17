@@ -98,7 +98,7 @@ class _PriceButtonState extends State<PriceButton> {
                                   inputFormatters: [
                                     CurrencyValidatorInputFormatter(
                                         editingValidator:
-                                            DecimalNumberEditingRegexValidator())
+                                            _DecimalNumberEditingRegexValidator())
                                   ],
                                   focusNode: _focusNode,
                                   controller: _textEditingController))),
@@ -110,12 +110,12 @@ class _PriceButtonState extends State<PriceButton> {
   }
 }
 
-class DecimalNumberEditingRegexValidator extends RegexValidator {
-  DecimalNumberEditingRegexValidator()
+class _DecimalNumberEditingRegexValidator extends RegexValidator {
+  _DecimalNumberEditingRegexValidator()
       : super(regexSource: "^\$|^(0|([1-9][0-9]{0,1}))(\\.[0-9]{0,2})?\$");
 }
 
-class DecimalNumberSubmitValidator implements StringValidator {
+class _DecimalNumberSubmitValidator implements StringValidator {
   @override
   bool isValid(String value) {
     try {

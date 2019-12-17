@@ -11,10 +11,10 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class SelectLocationOnMapRoute extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => SelectLocationOnMapRouteState();
+  State<StatefulWidget> createState() => _SelectLocationOnMapRouteState();
 }
 
-class SelectLocationOnMapRouteState extends State<SelectLocationOnMapRoute> {
+class _SelectLocationOnMapRouteState extends State<SelectLocationOnMapRoute> {
   // The Google Maps map controller
   GoogleMapController _mapController;
 

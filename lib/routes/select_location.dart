@@ -6,6 +6,11 @@ import 'package:aventones/widgets/origin_and_destination_container.dart';
 import 'package:flutter/material.dart';
 
 class SelectLocationRoute extends StatelessWidget {
+
+  final bool wasAutoFocusRequestedOnOrigin;
+
+  const SelectLocationRoute({Key key, this.wasAutoFocusRequestedOnOrigin}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,6 +29,7 @@ class SelectLocationRoute extends StatelessWidget {
                     left: 16.0, right: 16.0, bottom: 16.0),
                 child: OriginAndDestinationContainer(
                   isTheContainerAPreview: false,
+                  wasAutoFocusRequestedOnOrigin: wasAutoFocusRequestedOnOrigin,
                 ),
               ),
               Expanded(

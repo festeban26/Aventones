@@ -12,10 +12,10 @@ class SelectLocationOnAutocomplete extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => SelectLocationOnAutocompleteState();
+  State<StatefulWidget> createState() => _SelectLocationOnAutocompleteState();
 }
 
-class SelectLocationOnAutocompleteState
+class _SelectLocationOnAutocompleteState
     extends State<SelectLocationOnAutocomplete> {
   List<GoogleAutocompletePlace> _googlePlacesPredictions = List();
   TextEditingController _searchTextEditingController;
