@@ -29,72 +29,167 @@ class OriginAndDestinationContainerState
     return Card(
       elevation: Dimensions.Elevation_CardUnselected,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
-      child: InkWell(
-        onTap: () {
-          // Only if the container is a preview
-          if (widget.isTheContainerAPreview) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => SelectLocationRoute()),
-            );
-          }
-        },
-        borderRadius: BorderRadius.circular(16.0),
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Row(
-            children: <Widget>[
-              Expanded(
-                flex: 85,
-                child: Row(
-                  children: <Widget>[
-                    Expanded(flex: 15, child: _originAndDestinationIcons()),
-                    SizedBox(
-                      width: 8,
-                    ),
-                    Expanded(
-                      flex: 70,
-                      child: _originAndDestinationInputs(
-                          context,
-                          _originExample,
-                          _destinationExample,
-                          widget.isTheContainerAPreview),
-                    ),
-                  ],
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          children: <Widget>[
+            Expanded(
+              flex: 85,
+              child: Stack(
+                children: <Widget>[
+                  // The true 'Origin' and 'Destination' components
+                  Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: <Widget>[
+                      Expanded(
+                        flex: 15,
+                        child: OriginAndDestinationIcons(),
+                      ),
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Expanded(
+                        flex: 85,
+                        child: OriginAndDestinationTextContainer(
+                          originText: _originExample,
+                          destinationText: _destinationExample,
+                          isTheContainerAPreview: widget.isTheContainerAPreview,
+                        ),
+                      ),
+                    ],
+                  ),
+                  // Only if it the Origin and Destination container is a preview
+                  widget.isTheContainerAPreview
+                      // The larger area described above. This area is meant to
+                      // capture onClick events on 'Origin' or 'Destination'
+                      // The Positioned.fill depends oon the parent (Stack) widget's size
+                      ? Positioned.fill(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: <Widget>[
+                              // Widget that overlaps 'Origin'
+                              Expanded(
+                                flex: 50, //  50%
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.red),
+                                  ),
+                                  child: GestureDetector(
+                                    // On 'Select Origin Area' tap
+                                    onTap: () {
+                                      // TODO
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                SelectLocationRoute()),
+                                      );
+                                    },
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                flex: 50, // 50%
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.blue),
+                                  ),
+                                  child: GestureDetector(
+                                    // On 'Select Destination Area' tap
+                                    onTap: () {
+                                      // TODO
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                SelectLocationRoute()),
+                                      );
+                                    },
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
+                      // Empty widget (simulating there is not widget)
+                      : SizedBox(),
+                ],
+              ),
+            ),
+            SizedBox(
+              width: 8,
+            ),
+            Expanded(
+              flex: 15,
+              child: InkWell(
+                // The swap button
+                // TODO swap behavior
+                onTap: () {},
+
+                child: Container(
+                  height: 48,
+                  width: 48,
+                  child: Center(
+                    child: Icon(Icons.swap_vert,
+                        color: CompanyColors.customBlack, size: 40.0),
+                  ),
                 ),
+                customBorder: CircleBorder(),
               ),
-              SizedBox(
-                width: 8,
-              ),
-              Expanded(
-                flex: 15,
-                child: _originAndDestinationSwapIcon(),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
   }
 }
 
-Widget _originAndDestinationIcons() {
-  return Container(
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
+class OriginAndDestinationIcons extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Icon(Icons.trip_origin, color: CompanyColors.customBlack, size: 32),
+          Icon(Icons.fiber_manual_record,
+              color: CompanyColors.customBlack, size: 16),
+          Icon(Icons.fiber_manual_record,
+              color: CompanyColors.customBlack, size: 16),
+          Icon(Icons.fiber_manual_record,
+              color: CompanyColors.customBlack, size: 16),
+          Icon(Icons.location_on, color: CompanyColors.customBlack, size: 32),
+        ],
+      ),
+    );
+  }
+}
+
+class OriginAndDestinationTextContainer extends StatelessWidget {
+  final String originText;
+  final String destinationText;
+  final bool isTheContainerAPreview;
+
+  const OriginAndDestinationTextContainer(
+      {Key key,
+      this.originText,
+      this.destinationText,
+      this.isTheContainerAPreview})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
       children: <Widget>[
-        Icon(Icons.trip_origin, color: CompanyColors.customBlack, size: 32),
-        Icon(Icons.fiber_manual_record,
-            color: CompanyColors.customBlack, size: 16),
-        Icon(Icons.fiber_manual_record,
-            color: CompanyColors.customBlack, size: 16),
-        Icon(Icons.fiber_manual_record,
-            color: CompanyColors.customBlack, size: 16),
-        Icon(Icons.location_on, color: CompanyColors.customBlack, size: 32),
+        _originOrDestinationTextWidget(
+            context, originText, true, isTheContainerAPreview),
+        _originOrDestinationTextWidget(
+            context, destinationText, false, isTheContainerAPreview),
       ],
-    ),
-  );
+    );
+  }
 }
 
 Widget _originOrDestinationTextWidget(BuildContext context, String address,
@@ -141,9 +236,12 @@ Widget _originOrDestinationTextWidget(BuildContext context, String address,
         border: InputBorder.none,
       ),
       onChanged: (text) {
+        // If the text change, it means the user is entering data.
+        // TODO
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => SelectLocationOnAutocomplete()),
+          MaterialPageRoute(
+              builder: (context) => SelectLocationOnAutocomplete()),
         );
       },
     );
@@ -160,27 +258,4 @@ Widget _originOrDestinationTextWidget(BuildContext context, String address,
     );
   }
   return child;
-}
-
-Widget _originAndDestinationInputs(BuildContext context, String origin,
-    String destination, bool isTheContainerAPreview) {
-  return Column(
-    children: <Widget>[
-      _originOrDestinationTextWidget(
-          context, origin, true, isTheContainerAPreview),
-      _originOrDestinationTextWidget(
-          context, destination, false, isTheContainerAPreview),
-    ],
-  );
-}
-
-Widget _originAndDestinationSwapIcon() {
-  return InkWell(
-    onTap: () {},
-    child: Padding(
-      padding: const EdgeInsets.all(4.0),
-      child: Icon(Icons.swap_vert, color: CompanyColors.customBlack, size: 40),
-    ),
-    customBorder: CircleBorder(),
-  );
 }

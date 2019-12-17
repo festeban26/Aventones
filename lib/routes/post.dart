@@ -22,55 +22,55 @@ class _PostScreenState extends State<PostScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: CompanyColors.customBlack,
-        body: SafeArea(
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: <Widget>[
-              AppBar(title: Text("Publicar viaje"), elevation: 0.0),
-              Expanded(
-                child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(
-                    color: CompanyColors.customLightGray,
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(
-                            Dimensions.BorderRadiusEffect_Radius),
-                        topRight: Radius.circular(
-                            Dimensions.BorderRadiusEffect_Radius)),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black,
-                        blurRadius: Dimensions.BoxShadowEffect_blurRadius,
-                        spreadRadius: Dimensions.BoxShadowEffect_spreadRadius,
-                      )
-                    ],
-                  ),
-                  child: SingleChildScrollView(
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          SizedBox(height: 8),
-                          OriginAndDestinationContainer(
-                              isTheContainerAPreview: true),
-                          SizedBox(height: 8),
-                          _Preferences(),
-                          SizedBox(height: 16),
-                          _PostButton(),
-                          SizedBox(height: 24),
-                          _Autocomplete(),
-                        ],
-                      ),
+      backgroundColor: CompanyColors.customBlack,
+      body: SafeArea(
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          children: <Widget>[
+            AppBar(title: Text("Publicar viaje"), elevation: 0.0),
+            Expanded(
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                  color: CompanyColors.customLightGray,
+                  borderRadius: BorderRadius.only(
+                      topLeft:
+                          Radius.circular(Dimensions.BorderRadiusEffect_Radius),
+                      topRight: Radius.circular(
+                          Dimensions.BorderRadiusEffect_Radius)),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black,
+                      blurRadius: Dimensions.BoxShadowEffect_blurRadius,
+                      spreadRadius: Dimensions.BoxShadowEffect_spreadRadius,
+                    )
+                  ],
+                ),
+                child: SingleChildScrollView(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                        SizedBox(height: 8),
+                        OriginAndDestinationContainer(
+                            isTheContainerAPreview: true),
+                        SizedBox(height: 8),
+                        _Preferences(),
+                        SizedBox(height: 16),
+                        _PostButton(),
+                        SizedBox(height: 24),
+                        _Autocomplete(),
+                      ],
                     ),
                   ),
                 ),
               ),
-            ],
-          ),
-        ));
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
 
