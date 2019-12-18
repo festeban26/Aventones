@@ -113,7 +113,8 @@ class _OriginAndDestinationContainerState
                                         MaterialPageRoute(
                                           builder: (context) =>
                                               SelectLocationRoute(
-                                            wasAutoFocusRequestedOnOrigin: false,
+                                            wasAutoFocusRequestedOnOrigin:
+                                                false,
                                           ),
                                         ),
                                       );
@@ -258,18 +259,16 @@ class _OriginOrDestinationTextWidget extends StatelessWidget {
         }()),
         autofocus: (() {
           // Only if the container is not a preview
-          if(!this.isTheContainerAPreview){
+          if (!this.isTheContainerAPreview) {
             // If auto focus was requested on origin and this is the origin: Acquire auto focus
-            if(this.wasAutoFocusRequestedOnOrigin && this.isOrigin)
+            if (this.wasAutoFocusRequestedOnOrigin && this.isOrigin)
               return true;
             // If auto focus was requested on destination and this is the destination: Acquire auto focus
-            else if(!this.wasAutoFocusRequestedOnOrigin && !this.isOrigin)
+            else if (!this.wasAutoFocusRequestedOnOrigin && !this.isOrigin)
               return true;
-
           }
           // In any other conditions, do not acquire auto focus
           return false;
-
         }()),
         keyboardType: TextInputType.text,
         decoration: InputDecoration(
@@ -283,7 +282,10 @@ class _OriginOrDestinationTextWidget extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => SelectLocationOnAutocomplete()),
+              builder: (context) => SelectLocationOnAutocomplete(
+                startSearchTermString: text,
+              ),
+            ),
           );
         },
       );
