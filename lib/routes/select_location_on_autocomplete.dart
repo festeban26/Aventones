@@ -20,6 +20,9 @@ class _SelectLocationOnAutocompleteState
   List<GoogleAutocompletePlace> _googlePlacesPredictions = List();
   TextEditingController _searchTextEditingController;
 
+  // Prevent _EmptyResultsMessageWidget to be shown on startup
+  bool _displayEmptyResultsMessageWidget = false;
+
   @override
   void initState() {
     super.initState();
@@ -29,7 +32,19 @@ class _SelectLocationOnAutocompleteState
     // If a starting search text was supplied to this widget, set the search text
     // to its value.
     if (widget.startSearchTermString != null) {
+      // Update the text in the search bar
       _searchTextEditingController.text = widget.startSearchTermString;
+
+      // Request Places API autocomplete with the initial text
+      GooglePlacesApiAutocomplete.autocomplete(widget.startSearchTermString)
+          .then((predictions) {
+        setState(() {
+          if (predictions != null) {
+            _googlePlacesPredictions = predictions;
+            _displayEmptyResultsMessageWidget = true;
+          }
+        });
+      });
     }
   }
 
@@ -95,6 +110,7 @@ class _SelectLocationOnAutocompleteState
                       ),
                       controller: _searchTextEditingController,
                       onChanged: (text) {
+
                         GooglePlacesApiAutocomplete.autocomplete(text)
                             .then((predictions) {
                           setState(() {
@@ -121,61 +137,62 @@ class _SelectLocationOnAutocompleteState
                   child: Material(
                     child: Padding(
                       padding: const EdgeInsets.only(top: 4.0),
-                      child:
-                          // If there was no places, show text
-                          _googlePlacesPredictions.length == 0
+                      child: _googlePlacesPredictions?.length == 0
+                          // If there was no places
+                          ? _displayEmptyResultsMessageWidget
+                              // If the route is has already initialize itself
                               ? _EmptyResultsMessageWidget()
-                              : ListView.separated(
-                                  itemCount: _googlePlacesPredictions.length,
-                                  itemBuilder: ((context, index) {
-                                    var prediction =
-                                        _googlePlacesPredictions[index];
-                                    return ListTile(
-                                      title: Text(
-                                        prediction.mainText,
-                                        style: TextStyle(
-                                          fontSize: Dimensions
-                                              .listItemNormal_TextSize,
-                                        ),
-                                      ),
-                                      subtitle: Text(
-                                        prediction.secondaryText,
-                                        style: TextStyle(
-                                          fontSize: Dimensions.small_TextSize,
-                                        ),
-                                      ),
-                                      leading: Icon(
-                                        Icons.location_on,
-                                        size: 40.0,
-                                        color: CompanyColors.customBlack,
-                                      ),
-                                      dense: true,
-                                      onTap: () {
-                                        // Clicked on place with id: _googlePlacesPredictions[index].placeId
-                                        String placeId =
-                                            _googlePlacesPredictions[index]
-                                                .placeId;
-                                        GooglePlacesApiAutocomplete
-                                                .getCoordinatesOfPlaceId(
-                                                    placeId)
-                                            .then((latLng) {
-                                          if (latLng != null) {
-                                            GeolocatorHelper
-                                                    .getLocationModelDataFromLatLng(
-                                                        latLng)
-                                                .then((location) {
-                                              // TODO location ready
-                                              print(location.streetName);
-                                            });
-                                          }
+                              // If the route is initializing, display nothing
+                              : SizedBox(height: 10,)
+                          : ListView.separated(
+                              itemCount: _googlePlacesPredictions.length,
+                              itemBuilder: ((context, index) {
+                                var prediction =
+                                    _googlePlacesPredictions[index];
+                                return ListTile(
+                                  title: Text(
+                                    prediction.mainText != null ? prediction.mainText : '' ,
+                                    style: TextStyle(
+                                      fontSize:
+                                          Dimensions.listItemNormal_TextSize,
+                                    ),
+                                  ),
+                                  subtitle: Text(
+                                    prediction.secondaryText != null ? prediction.secondaryText : '',
+                                    style: TextStyle(
+                                      fontSize: Dimensions.small_TextSize,
+                                    ),
+                                  ),
+                                  leading: Icon(
+                                    Icons.location_on,
+                                    size: 40.0,
+                                    color: CompanyColors.customBlack,
+                                  ),
+                                  dense: true,
+                                  onTap: () {
+                                    // Clicked on place with id: _googlePlacesPredictions[index].placeId
+                                    String placeId =
+                                        _googlePlacesPredictions[index].placeId;
+                                    GooglePlacesApiAutocomplete
+                                            .getCoordinatesOfPlaceId(placeId)
+                                        .then((latLng) {
+                                      if (latLng != null) {
+                                        GeolocatorHelper
+                                                .getLocationModelDataFromLatLng(
+                                                    latLng)
+                                            .then((location) {
+                                          // TODO location ready
+                                          print(location.streetName);
                                         });
-                                      },
-                                    );
-                                  }),
-                                  separatorBuilder: (context, index) {
-                                    return Divider();
+                                      }
+                                    });
                                   },
-                                ),
+                                );
+                              }),
+                              separatorBuilder: (context, index) {
+                                return Divider();
+                              },
+                            ),
                     ),
                   ),
                 ),
@@ -186,8 +203,6 @@ class _SelectLocationOnAutocompleteState
       ),
     );
   }
-
-
 }
 
 class _EmptyResultsMessageWidget extends StatelessWidget {
