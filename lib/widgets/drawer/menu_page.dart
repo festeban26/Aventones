@@ -12,7 +12,7 @@ class MenuScreen extends StatelessWidget {
 
   final List<MenuItem> options = [
     MenuItem(Icons.search, 'Buscar un viaje', null),
-    MenuItem(Icons.add, 'Publicar un viaje', PostScreen()),
+    MenuItem(Icons.add, 'Publicar un viaje', PostRoute()),
     MenuItem(Icons.directions_car, 'Mis viajes', null),
     MenuItem(Icons.mail, 'Mensajes', null),
     MenuItem(Icons.android, 'Test Route', null),
@@ -135,7 +135,7 @@ class MenuScreen extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => FacebookLoginScreen(),
+                    builder: (context) => FacebookLoginRoute(),
                   ),
                 );
               },

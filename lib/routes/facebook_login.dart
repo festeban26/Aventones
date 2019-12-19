@@ -3,12 +3,12 @@ import 'dart:async';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:flutter/material.dart';
 
-class FacebookLoginScreen extends StatefulWidget {
+class FacebookLoginRoute extends StatefulWidget {
   @override
-  _FacebookLoginScreenState createState() => _FacebookLoginScreenState();
+  _FacebookLoginRouteState createState() => _FacebookLoginRouteState();
 }
 
-class _FacebookLoginScreenState extends State<FacebookLoginScreen> {
+class _FacebookLoginRouteState extends State<FacebookLoginRoute> {
   static final FacebookLogin facebookLogin = new FacebookLogin();
   static final List<String> facebookLoginPermissions = [
     'email',

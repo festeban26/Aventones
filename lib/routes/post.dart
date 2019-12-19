@@ -11,14 +11,14 @@ import 'package:flutter/material.dart';
 import 'package:aventones/widgets/origin_and_destination_container.dart';
 import 'package:aventones/res/dimensions.dart';
 
-class PostScreen extends StatefulWidget {
-  PostScreen({Key key}) : super(key: key);
+class PostRoute extends StatefulWidget {
+  PostRoute({Key key}) : super(key: key);
 
   @override
-  _PostScreenState createState() => _PostScreenState();
+  _PostRouteState createState() => _PostRouteState();
 }
 
-class _PostScreenState extends State<PostScreen> {
+class _PostRouteState extends State<PostRoute> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

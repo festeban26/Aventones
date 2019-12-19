@@ -6,18 +6,18 @@ import 'package:aventones/res/company_colors.dart';
 import 'package:aventones/res/dimensions.dart';
 import 'package:flutter/material.dart';
 
-class SelectLocationOnAutocomplete extends StatefulWidget {
+class SelectLocationOnAutocompleteRoute extends StatefulWidget {
   final String startSearchTermString;
 
-  const SelectLocationOnAutocomplete({Key key, this.startSearchTermString})
+  const SelectLocationOnAutocompleteRoute({Key key, this.startSearchTermString})
       : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => _SelectLocationOnAutocompleteState();
+  State<StatefulWidget> createState() => _SelectLocationOnAutocompleteRouteState();
 }
 
-class _SelectLocationOnAutocompleteState
-    extends State<SelectLocationOnAutocomplete> {
+class _SelectLocationOnAutocompleteRouteState
+    extends State<SelectLocationOnAutocompleteRoute> {
   List<GoogleAutocompletePlace> _googlePlacesPredictions = List();
   TextEditingController _searchTextEditingController;
 

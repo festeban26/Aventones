@@ -141,7 +141,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => PostScreen()),
+                                  builder: (context) => PostRoute()),
                             );
                           },
                           child: Container(
