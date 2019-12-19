@@ -1,5 +1,6 @@
 import 'package:aventones/helpers/geolocator_helper.dart';
-import 'package:aventones/helpers/places_api_autocomplete.dart';
+import 'package:aventones/helpers/google_places_api_autocomplete.dart';
+import 'package:aventones/helpers/google_places_api_place_details.dart';
 import 'package:aventones/models/google_autocomplete_place.dart';
 import 'package:aventones/res/company_colors.dart';
 import 'package:aventones/res/dimensions.dart';
@@ -173,7 +174,7 @@ class _SelectLocationOnAutocompleteState
                                     // Clicked on place with id: _googlePlacesPredictions[index].placeId
                                     String placeId =
                                         _googlePlacesPredictions[index].placeId;
-                                    GooglePlacesApiAutocomplete
+                                    GooglePlacesApiPlaceDetails
                                             .getCoordinatesOfPlaceId(placeId)
                                         .then((latLng) {
                                       if (latLng != null) {
