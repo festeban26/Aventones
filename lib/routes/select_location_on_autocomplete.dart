@@ -13,7 +13,8 @@ class SelectLocationOnAutocompleteRoute extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => _SelectLocationOnAutocompleteRouteState();
+  State<StatefulWidget> createState() =>
+      _SelectLocationOnAutocompleteRouteState();
 }
 
 class _SelectLocationOnAutocompleteRouteState
@@ -111,7 +112,6 @@ class _SelectLocationOnAutocompleteRouteState
                       ),
                       controller: _searchTextEditingController,
                       onChanged: (text) {
-
                         GooglePlacesApiAutocomplete.autocomplete(text)
                             .then((predictions) {
                           setState(() {
@@ -144,7 +144,9 @@ class _SelectLocationOnAutocompleteRouteState
                               // If the route is has already initialize itself
                               ? _EmptyResultsMessageWidget()
                               // If the route is initializing, display nothing
-                              : SizedBox(height: 10,)
+                              : SizedBox(
+                                  height: 10,
+                                )
                           : ListView.separated(
                               itemCount: _googlePlacesPredictions.length,
                               itemBuilder: ((context, index) {
@@ -152,14 +154,18 @@ class _SelectLocationOnAutocompleteRouteState
                                     _googlePlacesPredictions[index];
                                 return ListTile(
                                   title: Text(
-                                    prediction.mainText != null ? prediction.mainText : '' ,
+                                    prediction.mainText != null
+                                        ? prediction.mainText
+                                        : '',
                                     style: TextStyle(
                                       fontSize:
                                           Dimensions.listItemNormal_TextSize,
                                     ),
                                   ),
                                   subtitle: Text(
-                                    prediction.secondaryText != null ? prediction.secondaryText : '',
+                                    prediction.secondaryText != null
+                                        ? prediction.secondaryText
+                                        : '',
                                     style: TextStyle(
                                       fontSize: Dimensions.small_TextSize,
                                     ),
@@ -176,17 +182,20 @@ class _SelectLocationOnAutocompleteRouteState
                                         _googlePlacesPredictions[index].placeId;
                                     GooglePlacesApiPlaceDetails
                                             .getCoordinatesOfPlaceId(placeId)
-                                        .then((latLng) {
-                                      if (latLng != null) {
-                                        GeolocatorHelper
-                                                .getLocationModelDataFromLatLng(
-                                                    latLng)
-                                            .then((location) {
-                                          // TODO location ready
-                                          print(location.streetName);
-                                        });
-                                      }
-                                    });
+                                        .then(
+                                      (latLng) {
+                                        if (latLng != null) {
+                                          GeolocatorHelper
+                                                  .getLocationModelDataFromLatLng(
+                                                      latLng)
+                                              .then(
+                                            (location) {
+                                              Navigator.pop(context, location);
+                                            },
+                                          );
+                                        }
+                                      },
+                                    );
                                   },
                                 );
                               }),
@@ -242,4 +251,25 @@ class _EmptyResultsMessageWidget extends StatelessWidget {
       ),
     );
   }
+}
+
+class _ResultsListView extends StatefulWidget{
+
+  final List<GoogleAutocompletePlace> googlePlacesPredictions;
+
+  const _ResultsListView({Key key, this.googlePlacesPredictions})
+      : super(key: key);
+
+  @override
+  State<StatefulWidget> createState() => _ResultsListViewState();
+
+}
+
+class _ResultsListViewState extends State<_ResultsListView>{
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return null;
+  }
+
 }

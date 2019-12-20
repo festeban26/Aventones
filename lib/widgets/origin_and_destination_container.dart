@@ -1,3 +1,4 @@
+import 'package:aventones/models/location.dart';
 import 'package:aventones/res/dimensions.dart';
 import 'package:aventones/routes/select_location.dart';
 import 'package:aventones/routes/select_location_on_autocomplete.dart';
@@ -8,10 +9,15 @@ class OriginAndDestinationContainer extends StatefulWidget {
   final bool isTheContainerAPreview;
   final bool wasAutoFocusRequestedOnOrigin;
 
+  final Location origin;
+  final Location destination;
+
   const OriginAndDestinationContainer(
       {Key key,
       this.isTheContainerAPreview,
-      this.wasAutoFocusRequestedOnOrigin = true})
+      this.wasAutoFocusRequestedOnOrigin = true,
+      this.origin,
+      this.destination})
       : super(key: key);
 
   @override
@@ -277,16 +283,11 @@ class _OriginOrDestinationTextWidget extends StatelessWidget {
           border: InputBorder.none,
         ),
         onChanged: (text) {
-          // If the text change, it means the user is entering data.
-          // TODO
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => SelectLocationOnAutocomplete(
-                startSearchTermString: text,
-              ),
-            ),
-          );
+          // If the text change, it means the user is entering data. So open
+          // autocomplete
+          _navigateAndAwaitForLocation(context, text).then((selectedLocation){
+            print('test');
+          });
         },
       );
     } else {
@@ -301,5 +302,20 @@ class _OriginOrDestinationTextWidget extends StatelessWidget {
         ),
       );
     }
+  }
+
+  // A method that launches SelectLocationOnAutocomplete and awaits the result
+  // from Navigator.pop
+  Future<Location> _navigateAndAwaitForLocation(BuildContext context, String text) async {
+    final Location selectedLocation = await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => SelectLocationOnAutocompleteRoute(
+          startSearchTermString: text,
+        ),
+      ),
+    );
+
+    return selectedLocation;
   }
 }
