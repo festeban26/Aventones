@@ -1,0 +1,460 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AndroidLayouts">
+    <shared>
+      <config />
+    </shared>
+  </component>
+  <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="0382e03b-218d-4b26-93ab-e991c0f04494" name="Default Changelist" comment="" />
+    <list id="ef222950-eb1a-4adb-b2e7-1357e29b18cd" name="Revert &quot;Create GeolocatorHelper class to handle latlng data request from the Geocoder&quot;" comment="Revert &quot;Create GeolocatorHelper class to handle latlng data request from the Geocoder&quot;&#10;&#10;This reverts commit c91544e6" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DefaultGradleProjectSettings">
+    <option name="isMigrated" value="true" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Dart File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="festeban26 &lt;festeban26@gmail.com&gt;" />
+      </list>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1evkaDm2ondY1rNgbTF1e7Lddzl" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="dart.analysis.tool.window.force.activate" value="false" />
+    <property name="editor.config.ad.shown" value="true" />
+    <property name="io.flutter.reload.alreadyRun" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="show.migrate.to.gradle.popup" value="false" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\dev\apps\aventones\assets" />
+      <recent name="C:\dev\apps\aventones\assets\images" />
+      <recent name="C:\dev\apps\aventones" />
+      <recent name="C:\dev\apps\aventones\lib\assets\images" />
+      <recent name="C:\dev\apps\aventones\lib\routes" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\dev\apps\aventones\lib\widgets\drawer" />
+    </key>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0382e03b-218d-4b26-93ab-e991c0f04494" name="Default Changelist" comment="" />
+      <created>1574302706659</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1574302706659</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Fixed Google Maps Screen">
+      <created>1574304356591</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1574304356591</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Updated UI.&#10;Added functionality to some post widgets.">
+      <created>1574396302070</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1574396302070</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Post preferences buttons upgraded with InkWell behavior">
+      <created>1574398451173</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1574398451173</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Provide dialog opening animation to &quot;Post/Available Seats button&quot;">
+      <created>1574400039232</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1574400039232</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Add functionality to post preferences buttons &quot;Date&quot; and &quot;Time&quot;">
+      <created>1574897333119</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1574897333119</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Functionality added to number of seats button">
+      <created>1574915284520</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1574915284520</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Functionality added to price per seat button">
+      <created>1574988326497</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1574988326497</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Basic functionality added to OriginAndDestinationPreviewContainer on PostScreen">
+      <created>1574996019187</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1574996019187</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Added functionality to OriginAndDestinationPreviewContainer to work on both Post and Select Location routes">
+      <created>1575001456642</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1575001456642</updated>
+    </task>
+    <task id="LOCAL-00010" summary="&quot;Origin&quot; gets autofocus when opening &quot;Select Location&quot; route">
+      <created>1575006738795</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1575006738795</updated>
+    </task>
+    <task id="LOCAL-00011" summary="- Select location on map starts in Ecuador and then moves camera to user current location.&#10;- Setup &quot;geolocator&quot; plugin">
+      <created>1575047008465</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1575047008465</updated>
+    </task>
+    <task id="LOCAL-00012" summary="- Setup GoogleMap() view's preferences">
+      <created>1575048168976</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1575048168976</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Setup GeoLocator">
+      <created>1575171489823</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1575171489823</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Show dropdown pin on &quot;Select location on map&quot;">
+      <created>1575172381603</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1575172381603</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Get and store the dropdown pin location on &quot;Select location on map&quot;">
+      <created>1575174482511</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1575174482511</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Realtime view of LatLng values on &quot;Select location on map&quot; when the google maps camera moves.">
+      <created>1575260733449</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1575260733450</updated>
+    </task>
+    <task id="LOCAL-00017" summary="&quot;Select location on map&quot; now loads the Pin Address information and display it to the UI">
+      <created>1575342315788</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1575342315788</updated>
+    </task>
+    <task id="LOCAL-00018" summary="&quot;Select location on map&quot;: If the city is not available through the geo-locator, display the province string">
+      <created>1575394481877</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1575394481877</updated>
+    </task>
+    <task id="LOCAL-00019" summary="&quot;Select location on map&quot; custom class created to manage location data">
+      <created>1575593528844</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1575593528844</updated>
+    </task>
+    <task id="LOCAL-00020" summary="- Location model created to handle location data&#10;- &quot;Select Location on Map&quot; submit button now waits for the geolocator to load data">
+      <created>1575616353342</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1575616353342</updated>
+    </task>
+    <task id="LOCAL-00021" summary="&quot;Select Location on Map&quot; minor changes">
+      <created>1575616740377</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1575616740377</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Basic select location by autocomplete UI">
+      <created>1576197655664</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1576197655664</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Select location on autocomplete displays places as the user types">
+      <created>1576298988910</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1576298988910</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Select location on autocomplete solves UI overlay issues">
+      <created>1576302943452</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1576302943452</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Display GIF and message if no results on &quot;Select Location on Autocomplete&quot;">
+      <created>1576468375824</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1576468375824</updated>
+    </task>
+    <task id="LOCAL-00026" summary="First tests of requesting LatLng from google place id">
+      <created>1576472020151</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1576472020152</updated>
+    </task>
+    <task id="LOCAL-00027" summary="Geocoder display data optimization">
+      <created>1576521057395</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1576521057395</updated>
+    </task>
+    <task id="LOCAL-00028" summary="Update get method to be more explicit">
+      <created>1576521079864</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1576521079864</updated>
+    </task>
+    <task id="LOCAL-00029" summary="Create GeolocatorHelper class to handle latlng data request from the Geocoder">
+      <created>1576521161525</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1576521161525</updated>
+    </task>
+    <task id="LOCAL-00030" summary="Create GeolocatorHelper class to handle latlng data request from the Geocoder">
+      <created>1576521783038</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1576521783038</updated>
+    </task>
+    <task id="LOCAL-00031" summary="Update GooglePlacesApiAutocomplete to handle Places API Place details request using the PlaceID">
+      <created>1576522022589</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1576522022589</updated>
+    </task>
+    <task id="LOCAL-00032" summary="Select location on autocomplete now gets the Location Data Model of the selected place">
+      <created>1576543508981</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1576543508981</updated>
+    </task>
+    <task id="LOCAL-00033" summary="Select Location on Autocomplete now accepts an initial value">
+      <created>1576548322211</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1576548322211</updated>
+    </task>
+    <task id="LOCAL-00034" summary="Update 'Origin and Destination Container' and 'Post' UI. Optimizing widgets and on 'Origin and Destination Container' enabling a bigger area which receives the clicks to 'Origin Text' and 'Destination Text'">
+      <created>1576610841232</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1576610841232</updated>
+    </task>
+    <task id="LOCAL-00035" summary="Minor changes in classes names in order to fix issue with some private classes made public">
+      <created>1576615269154</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1576615269154</updated>
+    </task>
+    <task id="LOCAL-00036" summary="Concordance between clicks on 'Origin and Destination Containers' and the auto focus request on the new route the open">
+      <created>1576615982114</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1576615982114</updated>
+    </task>
+    <task id="LOCAL-00037" summary="Select Location on Autocomplete fix initial UI logic">
+      <created>1576642750187</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1576642750187</updated>
+    </task>
+    <task id="LOCAL-00038" summary="Origin and Destination Container auto focus concordance">
+      <created>1576642804298</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1576642804298</updated>
+    </task>
+    <task id="LOCAL-00039" summary="Minor changes on Google Places API Helpers in order to improve code readability and project structure.">
+      <created>1576776953175</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1576776953176</updated>
+    </task>
+    <task id="LOCAL-00040" summary="Minor changes on Select Location on Autocomplete: Update Google Places API Helpers classes names">
+      <created>1576777081912</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1576777081912</updated>
+    </task>
+    <task id="LOCAL-00041" summary="Consistency between route classes">
+      <created>1576778217821</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1576778217821</updated>
+    </task>
+    <task id="LOCAL-00042" summary="Select Location on Autocomplete now returns a location">
+      <created>1576805268269</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1576805268269</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
+    <servers />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list />
+          </value>
+        </entry>
+        <entry key="User">
+          <value>
+            <list />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CHECK_NEW_TODO" value="false" />
+    <MESSAGE value="&quot;Select location on map&quot; now loads the Pin Address information and display it to the UI" />
+    <MESSAGE value="&quot;Select location on map&quot;: If the city is not available through the geo-locator, display the province string" />
+    <MESSAGE value="&quot;Select location on map&quot; custom class created to manage location data" />
+    <MESSAGE value="- Location model created to handle location data&#10;- &quot;Select Location on Map&quot; submit button now waits for the geolocator to load data" />
+    <MESSAGE value="&quot;Select Location on Map&quot; minor changes" />
+    <MESSAGE value="Basic select location by autocomplete UI" />
+    <MESSAGE value="Select location on autocomplete displays places as the user types" />
+    <MESSAGE value="Select location on autocomplete solves UI overlay issues" />
+    <MESSAGE value="Display GIF and message if no results on &quot;Select Location on Autocomplete&quot;" />
+    <MESSAGE value="First tests of requesting LatLng from google place id" />
+    <MESSAGE value="Geocoder display data optimization" />
+    <MESSAGE value="Update get method to be more explicit" />
+    <MESSAGE value="Create GeolocatorHelper class to handle latlng data request from the Geocoder" />
+    <MESSAGE value="Update GooglePlacesApiAutocomplete to handle Places API Place details request using the PlaceID" />
+    <MESSAGE value="Select location on autocomplete now gets the Location Data Model of the selected place" />
+    <MESSAGE value="Select Location on Autocomplete now accepts an initial value" />
+    <MESSAGE value="Update 'Origin and Destination Container' and 'Post' UI. Optimizing widgets and on 'Origin and Destination Container' enabling a bigger area which receives the clicks to 'Origin Text' and 'Destination Text'" />
+    <MESSAGE value="Minor changes in classes names in order to fix issue with some private classes made public" />
+    <MESSAGE value="Concordance between clicks on 'Origin and Destination Containers' and the auto focus request on the new route the open" />
+    <MESSAGE value="Select Location on Autocomplete fix initial UI logic" />
+    <MESSAGE value="Origin and Destination Container auto focus concordance" />
+    <MESSAGE value="Minor changes on Google Places API Helpers in order to improve code readability and project structure." />
+    <MESSAGE value="Minor changes on Select Location on Autocomplete: Update Google Places API Helpers classes names" />
+    <MESSAGE value="Consistency between route classes" />
+    <MESSAGE value="Select Location on Autocomplete now returns a location" />
+    <option name="LAST_COMMIT_MESSAGE" value="Select Location on Autocomplete now returns a location" />
+    <option name="PRESELECT_EXISTING_CHANGELIST" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="656" y="138" width="607" height="804" key="find.popup" timestamp="1595209636225">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="656" y="138" width="607" height="804" key="find.popup/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1595209636225" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="Dart">
+          <url>file://$PROJECT_DIR$/lib/widgets/origin_and_destination_container.dart</url>
+          <line>288</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="Dart">
+          <url>file://$PROJECT_DIR$/lib/widgets/origin_and_destination_container.dart</url>
+          <line>318</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

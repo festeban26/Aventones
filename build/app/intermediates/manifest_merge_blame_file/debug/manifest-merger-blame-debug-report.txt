@@ -1,0 +1,222 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.festeban26.aventones"
+4    android:versionCode="1"
+5    android:versionName="1.0.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="16"
+9        android:targetSdkVersion="28" />
+10    <!--
+11         Flutter needs it to communicate with the running application
+12         to allow setting breakpoints, to provide hot reload, etc.
+13    -->
+14    <uses-permission android:name="android.permission.INTERNET" />
+14-->C:\dev\apps\aventones\android\app\src\main\AndroidManifest.xml:7:5-67
+14-->C:\dev\apps\aventones\android\app\src\main\AndroidManifest.xml:7:22-64
+15    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+15-->C:\dev\apps\aventones\android\app\src\main\AndroidManifest.xml:4:5-79
+15-->C:\dev\apps\aventones\android\app\src\main\AndroidManifest.xml:4:22-76
+16    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+16-->C:\dev\apps\aventones\android\app\src\main\AndroidManifest.xml:5:5-81
+16-->C:\dev\apps\aventones\android\app\src\main\AndroidManifest.xml:5:22-78
+17    <uses-permission android:name="android.hardware.location.gps" /> <!-- Include required permissions for Google Maps API to run. -->
+17-->C:\dev\apps\aventones\android\app\src\main\AndroidManifest.xml:6:5-68
+17-->C:\dev\apps\aventones\android\app\src\main\AndroidManifest.xml:6:22-66
+18    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+18-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\feste\.gradle\caches\transforms-2\files-2.1\4ebe119ef6f785c66e1535b687fc1de5\play-services-maps-17.0.0\AndroidManifest.xml:23:5-79
+18-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\feste\.gradle\caches\transforms-2\files-2.1\4ebe119ef6f785c66e1535b687fc1de5\play-services-maps-17.0.0\AndroidManifest.xml:23:22-76
+19
+20    <uses-feature
+20-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\feste\.gradle\caches\transforms-2\files-2.1\4ebe119ef6f785c66e1535b687fc1de5\play-services-maps-17.0.0\AndroidManifest.xml:26:5-28:35
+21        android:glEsVersion="0x00020000"
+21-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\feste\.gradle\caches\transforms-2\files-2.1\4ebe119ef6f785c66e1535b687fc1de5\play-services-maps-17.0.0\AndroidManifest.xml:27:9-41
+22        android:required="true" />
+22-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\feste\.gradle\caches\transforms-2\files-2.1\4ebe119ef6f785c66e1535b687fc1de5\play-services-maps-17.0.0\AndroidManifest.xml:28:9-32
+23    <!--
+24 io.flutter.app.FlutterApplication is an android.app.Application that
+25         calls FlutterMain.startInitialization(this); in its onCreate method.
+26         In most cases you can leave this as-is, but you if you want to provide
+27         additional functionality it is fine to subclass or reimplement
+28         FlutterApplication and put your custom class here.
+29    -->
+30    <application
+30-->C:\dev\apps\aventones\android\app\src\main\AndroidManifest.xml:14:5-62:19
+31        android:name="io.flutter.app.FlutterApplication"
+31-->C:\dev\apps\aventones\android\app\src\main\AndroidManifest.xml:15:9-57
+32        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+32-->[androidx.core:core:1.0.2] C:\Users\feste\.gradle\caches\transforms-2\files-2.1\83dd696ebab5109b40aeb9f49d5069f8\core-1.0.2\AndroidManifest.xml:22:18-86
+33        android:debuggable="true"
+34        android:icon="@mipmap/ic_launcher"
+34-->C:\dev\apps\aventones\android\app\src\main\AndroidManifest.xml:17:9-43
+35        android:label="aventones"
+35-->C:\dev\apps\aventones\android\app\src\main\AndroidManifest.xml:16:9-34
+36        android:supportsRtl="true" >
+36-->[com.facebook.android:facebook-login:5.5.1] C:\Users\feste\.gradle\caches\transforms-2\files-2.1\e100f0631de09c3d045c2bbeca94c5e0\jetified-facebook-login-5.5.1\AndroidManifest.xml:28:18-44
+37
+38        <!-- Google Maps API KEY -->
+39        <meta-data
+39-->C:\dev\apps\aventones\android\app\src\main\AndroidManifest.xml:20:9-21:70
+40            android:name="com.google.android.geo.API_KEY"
+40-->C:\dev\apps\aventones\android\app\src\main\AndroidManifest.xml:20:20-65
+41            android:value="AIzaSyDvx7-w8LgfiWT47Ck96hOLCjZyFOcKCYo" />
+41-->C:\dev\apps\aventones\android\app\src\main\AndroidManifest.xml:21:13-68
+42
+43        <!-- Facebook Login -->
+44        <meta-data
+44-->C:\dev\apps\aventones\android\app\src\main\AndroidManifest.xml:24:9-25:54
+45            android:name="com.facebook.sdk.ApplicationId"
+45-->C:\dev\apps\aventones\android\app\src\main\AndroidManifest.xml:24:20-65
+46            android:value="@string/facebook_app_id" />
+46-->C:\dev\apps\aventones\android\app\src\main\AndroidManifest.xml:25:13-52
+47
+48        <activity
+48-->C:\dev\apps\aventones\android\app\src\main\AndroidManifest.xml:27:9-30:48
+49            android:name="com.facebook.FacebookActivity"
+49-->C:\dev\apps\aventones\android\app\src\main\AndroidManifest.xml:27:19-63
+50            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+50-->C:\dev\apps\aventones\android\app\src\main\AndroidManifest.xml:28:13-114
+51            android:label="@string/app_name"
+51-->C:\dev\apps\aventones\android\app\src\main\AndroidManifest.xml:30:13-45
+52            android:theme="@style/com_facebook_activity_theme" />
+52-->[com.facebook.android:facebook-common:5.5.1] C:\Users\feste\.gradle\caches\transforms-2\files-2.1\2c6212eaf11425661a2bdc3fe6179ba3\jetified-facebook-common-5.5.1\AndroidManifest.xml:32:13-63
+53        <activity
+53-->C:\dev\apps\aventones\android\app\src\main\AndroidManifest.xml:31:9-40:20
+54            android:name="com.facebook.CustomTabActivity"
+54-->C:\dev\apps\aventones\android\app\src\main\AndroidManifest.xml:32:13-58
+55            android:exported="true" >
+55-->C:\dev\apps\aventones\android\app\src\main\AndroidManifest.xml:33:13-36
+56            <intent-filter>
+56-->C:\dev\apps\aventones\android\app\src\main\AndroidManifest.xml:34:13-39:29
+57                <action android:name="android.intent.action.VIEW" />
+57-->C:\dev\apps\aventones\android\app\src\main\AndroidManifest.xml:35:17-69
+57-->C:\dev\apps\aventones\android\app\src\main\AndroidManifest.xml:35:25-66
+58
+59                <category android:name="android.intent.category.DEFAULT" />
+59-->C:\dev\apps\aventones\android\app\src\main\AndroidManifest.xml:36:17-76
+59-->C:\dev\apps\aventones\android\app\src\main\AndroidManifest.xml:36:27-73
+60                <category android:name="android.intent.category.BROWSABLE" />
+60-->C:\dev\apps\aventones\android\app\src\main\AndroidManifest.xml:37:17-78
+60-->C:\dev\apps\aventones\android\app\src\main\AndroidManifest.xml:37:27-75
+61
+62                <data android:scheme="@string/fb_login_protocol_scheme" />
+62-->C:\dev\apps\aventones\android\app\src\main\AndroidManifest.xml:38:17-75
+62-->C:\dev\apps\aventones\android\app\src\main\AndroidManifest.xml:38:23-72
+63            </intent-filter>
+64        </activity>
+65        <!-- END of Facebook Login -->
+66
+67        <activity
+67-->C:\dev\apps\aventones\android\app\src\main\AndroidManifest.xml:43:9-61:20
+68            android:name="com.festeban26.aventones.MainActivity"
+68-->C:\dev\apps\aventones\android\app\src\main\AndroidManifest.xml:44:13-41
+69            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+69-->C:\dev\apps\aventones\android\app\src\main\AndroidManifest.xml:47:13-144
+70            android:hardwareAccelerated="true"
+70-->C:\dev\apps\aventones\android\app\src\main\AndroidManifest.xml:48:13-47
+71            android:launchMode="singleTop"
+71-->C:\dev\apps\aventones\android\app\src\main\AndroidManifest.xml:45:13-43
+72            android:theme="@style/LaunchTheme"
+72-->C:\dev\apps\aventones\android\app\src\main\AndroidManifest.xml:46:13-47
+73            android:windowSoftInputMode="adjustResize" >
+73-->C:\dev\apps\aventones\android\app\src\main\AndroidManifest.xml:49:13-55
+74
+75            <!--
+76                 This keeps the window background of the activity showing
+77                 until Flutter renders its first frame. It can be removed if
+78                 there is no splash screen (such as the default splash screen
+79                 defined in @style/LaunchTheme).
+80            -->
+81            <meta-data
+81-->C:\dev\apps\aventones\android\app\src\main\AndroidManifest.xml:54:13-56:40
+82                android:name="io.flutter.app.android.SplashScreenUntilFirstFrame"
+82-->C:\dev\apps\aventones\android\app\src\main\AndroidManifest.xml:55:17-82
+83                android:value="true" />
+83-->C:\dev\apps\aventones\android\app\src\main\AndroidManifest.xml:56:17-37
+84
+85            <intent-filter>
+85-->C:\dev\apps\aventones\android\app\src\main\AndroidManifest.xml:57:13-60:29
+86                <action android:name="android.intent.action.MAIN" />
+86-->C:\dev\apps\aventones\android\app\src\main\AndroidManifest.xml:58:17-68
+86-->C:\dev\apps\aventones\android\app\src\main\AndroidManifest.xml:58:25-66
+87
+88                <category android:name="android.intent.category.LAUNCHER" />
+88-->C:\dev\apps\aventones\android\app\src\main\AndroidManifest.xml:59:17-76
+88-->C:\dev\apps\aventones\android\app\src\main\AndroidManifest.xml:59:27-74
+89            </intent-filter>
+90        </activity>
+91        <!-- Needs to be explicitly declared on P+ -->
+92        <uses-library
+92-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\feste\.gradle\caches\transforms-2\files-2.1\4ebe119ef6f785c66e1535b687fc1de5\play-services-maps-17.0.0\AndroidManifest.xml:33:9-35:40
+93            android:name="org.apache.http.legacy"
+93-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\feste\.gradle\caches\transforms-2\files-2.1\4ebe119ef6f785c66e1535b687fc1de5\play-services-maps-17.0.0\AndroidManifest.xml:34:13-50
+94            android:required="false" />
+94-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\feste\.gradle\caches\transforms-2\files-2.1\4ebe119ef6f785c66e1535b687fc1de5\play-services-maps-17.0.0\AndroidManifest.xml:35:13-37
+95
+96        <activity android:name="com.facebook.CustomTabMainActivity" />
+96-->[com.facebook.android:facebook-common:5.5.1] C:\Users\feste\.gradle\caches\transforms-2\files-2.1\2c6212eaf11425661a2bdc3fe6179ba3\jetified-facebook-common-5.5.1\AndroidManifest.xml:33:9-71
+96-->[com.facebook.android:facebook-common:5.5.1] C:\Users\feste\.gradle\caches\transforms-2\files-2.1\2c6212eaf11425661a2bdc3fe6179ba3\jetified-facebook-common-5.5.1\AndroidManifest.xml:33:19-68
+97        <activity
+97-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\feste\.gradle\caches\transforms-2\files-2.1\2f220e4626961757d61af53add94b7ee\play-services-base-17.0.0\AndroidManifest.xml:23:9-26:75
+98            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+98-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\feste\.gradle\caches\transforms-2\files-2.1\2f220e4626961757d61af53add94b7ee\play-services-base-17.0.0\AndroidManifest.xml:24:13-79
+99            android:exported="false"
+99-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\feste\.gradle\caches\transforms-2\files-2.1\2f220e4626961757d61af53add94b7ee\play-services-base-17.0.0\AndroidManifest.xml:25:13-37
+100            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+100-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\feste\.gradle\caches\transforms-2\files-2.1\2f220e4626961757d61af53add94b7ee\play-services-base-17.0.0\AndroidManifest.xml:26:13-72
+101
+102        <meta-data
+102-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\feste\.gradle\caches\transforms-2\files-2.1\2f522c6609e01fe11d7d8508dc738679\jetified-play-services-basement-17.0.0\AndroidManifest.xml:23:9-25:69
+103            android:name="com.google.android.gms.version"
+103-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\feste\.gradle\caches\transforms-2\files-2.1\2f522c6609e01fe11d7d8508dc738679\jetified-play-services-basement-17.0.0\AndroidManifest.xml:24:13-58
+104            android:value="@integer/google_play_services_version" />
+104-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\feste\.gradle\caches\transforms-2\files-2.1\2f522c6609e01fe11d7d8508dc738679\jetified-play-services-basement-17.0.0\AndroidManifest.xml:25:13-66
+105        <!--
+106         The initialization ContentProvider will call FacebookSdk.sdkInitialize automatically
+107         with the application context. This config is merged in with the host app's manifest,
+108         but there can only be one provider with the same authority activated at any given
+109         point; so if the end user has two or more different apps that use Facebook SDK, only the
+110         first one will be able to use the provider. To work around this problem, we use the
+111         following placeholder in the authority to identify each host application as if it was
+112         a completely different provider.
+113        -->
+114        <provider
+114-->[com.facebook.android:facebook-core:5.5.1] C:\Users\feste\.gradle\caches\transforms-2\files-2.1\13db6237e3e66412d0f4791cf0727b21\jetified-facebook-core-5.5.1\AndroidManifest.xml:39:9-42:40
+115            android:name="com.facebook.internal.FacebookInitProvider"
+115-->[com.facebook.android:facebook-core:5.5.1] C:\Users\feste\.gradle\caches\transforms-2\files-2.1\13db6237e3e66412d0f4791cf0727b21\jetified-facebook-core-5.5.1\AndroidManifest.xml:40:13-70
+116            android:authorities="com.festeban26.aventones.FacebookInitProvider"
+116-->[com.facebook.android:facebook-core:5.5.1] C:\Users\feste\.gradle\caches\transforms-2\files-2.1\13db6237e3e66412d0f4791cf0727b21\jetified-facebook-core-5.5.1\AndroidManifest.xml:41:13-72
+117            android:exported="false" />
+117-->[com.facebook.android:facebook-core:5.5.1] C:\Users\feste\.gradle\caches\transforms-2\files-2.1\13db6237e3e66412d0f4791cf0727b21\jetified-facebook-core-5.5.1\AndroidManifest.xml:42:13-37
+118
+119        <receiver
+119-->[com.facebook.android:facebook-core:5.5.1] C:\Users\feste\.gradle\caches\transforms-2\files-2.1\13db6237e3e66412d0f4791cf0727b21\jetified-facebook-core-5.5.1\AndroidManifest.xml:44:9-50:20
+120            android:name="com.facebook.CurrentAccessTokenExpirationBroadcastReceiver"
+120-->[com.facebook.android:facebook-core:5.5.1] C:\Users\feste\.gradle\caches\transforms-2\files-2.1\13db6237e3e66412d0f4791cf0727b21\jetified-facebook-core-5.5.1\AndroidManifest.xml:45:13-86
+121            android:exported="false" >
+121-->[com.facebook.android:facebook-core:5.5.1] C:\Users\feste\.gradle\caches\transforms-2\files-2.1\13db6237e3e66412d0f4791cf0727b21\jetified-facebook-core-5.5.1\AndroidManifest.xml:46:13-37
+122            <intent-filter>
+122-->[com.facebook.android:facebook-core:5.5.1] C:\Users\feste\.gradle\caches\transforms-2\files-2.1\13db6237e3e66412d0f4791cf0727b21\jetified-facebook-core-5.5.1\AndroidManifest.xml:47:13-49:29
+123                <action android:name="com.facebook.sdk.ACTION_CURRENT_ACCESS_TOKEN_CHANGED" />
+123-->[com.facebook.android:facebook-core:5.5.1] C:\Users\feste\.gradle\caches\transforms-2\files-2.1\13db6237e3e66412d0f4791cf0727b21\jetified-facebook-core-5.5.1\AndroidManifest.xml:48:17-95
+123-->[com.facebook.android:facebook-core:5.5.1] C:\Users\feste\.gradle\caches\transforms-2\files-2.1\13db6237e3e66412d0f4791cf0727b21\jetified-facebook-core-5.5.1\AndroidManifest.xml:48:25-92
+124            </intent-filter>
+125        </receiver>
+126        <receiver
+126-->[com.facebook.android:facebook-core:5.5.1] C:\Users\feste\.gradle\caches\transforms-2\files-2.1\13db6237e3e66412d0f4791cf0727b21\jetified-facebook-core-5.5.1\AndroidManifest.xml:51:9-58:20
+127            android:name="com.facebook.CampaignTrackingReceiver"
+127-->[com.facebook.android:facebook-core:5.5.1] C:\Users\feste\.gradle\caches\transforms-2\files-2.1\13db6237e3e66412d0f4791cf0727b21\jetified-facebook-core-5.5.1\AndroidManifest.xml:52:13-65
+128            android:exported="true"
+128-->[com.facebook.android:facebook-core:5.5.1] C:\Users\feste\.gradle\caches\transforms-2\files-2.1\13db6237e3e66412d0f4791cf0727b21\jetified-facebook-core-5.5.1\AndroidManifest.xml:53:13-36
+129            android:permission="android.permission.INSTALL_PACKAGES" >
+129-->[com.facebook.android:facebook-core:5.5.1] C:\Users\feste\.gradle\caches\transforms-2\files-2.1\13db6237e3e66412d0f4791cf0727b21\jetified-facebook-core-5.5.1\AndroidManifest.xml:54:13-69
+130            <intent-filter>
+130-->[com.facebook.android:facebook-core:5.5.1] C:\Users\feste\.gradle\caches\transforms-2\files-2.1\13db6237e3e66412d0f4791cf0727b21\jetified-facebook-core-5.5.1\AndroidManifest.xml:55:13-57:29
+131                <action android:name="com.android.vending.INSTALL_REFERRER" />
+131-->[com.facebook.android:facebook-core:5.5.1] C:\Users\feste\.gradle\caches\transforms-2\files-2.1\13db6237e3e66412d0f4791cf0727b21\jetified-facebook-core-5.5.1\AndroidManifest.xml:56:17-79
+131-->[com.facebook.android:facebook-core:5.5.1] C:\Users\feste\.gradle\caches\transforms-2\files-2.1\13db6237e3e66412d0f4791cf0727b21\jetified-facebook-core-5.5.1\AndroidManifest.xml:56:25-76
+132            </intent-filter>
+133        </receiver>
+134    </application>
+135
+136</manifest>
