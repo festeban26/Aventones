@@ -11,9 +11,6 @@
   <component name="ChangeListManager">
     <list default="true" id="0382e03b-218d-4b26-93ab-e991c0f04494" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/helpers/google_places_api_autocomplete.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/helpers/google_places_api_autocomplete.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/res/apis_keys.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/res/apis_keys.dart" afterDir="false" />
     </list>
     <list id="ef222950-eb1a-4adb-b2e7-1357e29b18cd" name="Revert &quot;Create GeolocatorHelper class to handle latlng data request from the Geocoder&quot;" comment="Revert &quot;Create GeolocatorHelper class to handle latlng data request from the Geocoder&quot;&#10;&#10;This reverts commit c91544e6" />
     <option name="SHOW_DIALOG" value="false" />
@@ -371,7 +368,14 @@
       <option name="project" value="LOCAL" />
       <updated>1576805268269</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="Select Location on Autocomplete now returns a location">
+      <created>1595211495747</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1595211495747</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TodoView">
@@ -441,6 +445,14 @@
     <option name="PRESELECT_EXISTING_CHANGELIST" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="563" y="134" key="CommitChangelistDialog2" timestamp="1595211563288">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="563" y="134" key="CommitChangelistDialog2/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1595211563288" />
+    <state x="552" y="273" key="Vcs.Push.Dialog.v2" timestamp="1595211507366">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="552" y="273" key="Vcs.Push.Dialog.v2/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1595211507366" />
     <state x="656" y="364" key="com.intellij.ide.util.TipDialog" timestamp="1595211330244">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
