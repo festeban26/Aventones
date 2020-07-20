@@ -13,7 +13,7 @@ is plenty of alternatives.
 
 class GooglePlacesApiAutocomplete {
 
-  static final String key = 'AIzaSyDvx7-w8LgfiWT47Ck96hOLCjZyFOcKCYo';
+  static final String key = 'INSERT API KEY';
 
   static Future<List<GoogleAutocompletePlace>> autocomplete(
       String input) async {

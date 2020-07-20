@@ -9,7 +9,12 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0382e03b-218d-4b26-93ab-e991c0f04494" name="Default Changelist" comment="" />
+    <list default="true" id="0382e03b-218d-4b26-93ab-e991c0f04494" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/helpers/google_places_api_autocomplete.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/helpers/google_places_api_autocomplete.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/res/apis_keys.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/res/apis_keys.dart" afterDir="false" />
+    </list>
     <list id="ef222950-eb1a-4adb-b2e7-1357e29b18cd" name="Revert &quot;Create GeolocatorHelper class to handle latlng data request from the Geocoder&quot;" comment="Revert &quot;Create GeolocatorHelper class to handle latlng data request from the Geocoder&quot;&#10;&#10;This reverts commit c91544e6" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -436,10 +441,14 @@
     <option name="PRESELECT_EXISTING_CHANGELIST" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="656" y="138" width="607" height="804" key="find.popup" timestamp="1595209636225">
+    <state x="656" y="364" key="com.intellij.ide.util.TipDialog" timestamp="1595211330244">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="656" y="138" width="607" height="804" key="find.popup/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1595209636225" />
+    <state x="656" y="364" key="com.intellij.ide.util.TipDialog/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1595211330244" />
+    <state x="656" y="138" width="607" height="804" key="find.popup" timestamp="1595211446664">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="656" y="138" width="607" height="804" key="find.popup/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1595211446664" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

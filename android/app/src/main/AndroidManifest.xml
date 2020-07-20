@@ -18,7 +18,7 @@
 
         <!-- Google Maps API KEY -->
         <meta-data android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDvx7-w8LgfiWT47Ck96hOLCjZyFOcKCYo"/>
+            android:value="INSERT API KEY"/>
 
         <!-- Facebook Login -->
         <meta-data android:name="com.facebook.sdk.ApplicationId"
